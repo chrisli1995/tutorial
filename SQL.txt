@@ -1,0 +1,187 @@
+PROMPT \u@\h \d>
+mysql.user
+创建数据库：CREATE DATABASE 数据库名 DEFAULT CHARACTER SET 字符集 COLLATE 排序规则
+查看数据库格式：SHOW CREATE DATABASE 数据库名
+修改编码方式：ALTER DATABASE 数据库名 CHARACTER SET = 编码方式
+删除数据库：DROP DATABASE 数据库名
+打开数据库：USE 数据库名
+修改密码：mysqladmin -uroot -p‘旧密码’ password '新密码'
+          update mysql.user set password=password('456') where user='root' and  host='localhost'
+          set password=password('新密码')
+找回密码:mysql_safe --skip-grant-tables --user=mysql
+删除账号：DROP USER "用户名"@"主机域"
+备份数据库：E:\MySQLbackup>mysqldump -uroot -p test > test.sql
+---------------------------------------------------------------------------------------------------------------------------
+创建表：CREATE TABLE 表名（列名 数据类型,xx）
+查询表：SELECT XX FROM 表名
+查询表结构：SHOW COLUMNS FROM 表名 或者直接DESC 表名
+插入数据：INSERT 表名（可单独加列名） VALUES()
+查找表：SELECT 某列 FROM 表名
+自动编号：AUTO_INCREMENT
+设置主键：PRIMARY KEY
+唯一约束：UNIQUE KEY（可以存在多个 可有多个null）
+默认值：DEFAULT
+非空约束：NOT NULL
+把默认的零显示出来：ZEROFILL
+注释：跟在每一列的后面
+---------------------------------------------------------------------------------------------------------------------------
+外键约束：FOREIGN KEY (列名) REFERENCES (外表的某列)
+外键约束的参照标准：ON DELETE CASCADE(父表删除或更新的时候，子表也自动删除或更新)
+                              SET NULL(父表删除的时候，子表转化为null)
+                              RESTRICT(拒绝对父表进行操作)
+修改数据表：ALTER TABLE 表名 ADD(加列) 后可加 AFTER/FIRST
+                             DROP(删除列)
+                             ADD CONSTRAINT(添加约束) PK_表名_列名 PRIMARY KEY(列名)
+                             ADD UNIQUE KEY(列名) 
+                             ADD FOREIGN KEY(列名) REFERENCES 外表名(列名)
+                             ADD INDEX 索引名(列名)（创建普通索引）
+                             ALTER 列名 SET DEFAULT 缺省值
+                                        DROP DEFAULT(删除缺省值)
+                             DROP PRIMARY KEY(删除主键约束)
+                             DROP INDEX 列名（删除唯一约束）也可以是索引名（删除索引）
+                             DROP FOREIGN KEY 用SHOW CREATE TABLE 查到的名称
+                             MODIFY 列名 数据类型 FIRST/AFTER(修改列)
+                             CHANGE 原列名 新列名 数据类型
+                             RENAME 新表名////RENAME TABLE 原表名 TO 新表名
+创建索引：CREATE INDEX index_dept ON student（dept(8)）(对前N个字符创建索引，允许有多列一起创建联合索引)
+修改表的编码方式：ALTER TABLE 表名 CHARSET=编码方式
+取唯一值：DISTINCT
+直接清空表里面的数据：TRUNCATE TABLE 表名
+---------------------------------------------------------------------------------------------------------------------------
+插入记录：INSERT 表名 VALUES()可直接在后再添加新记录
+          INSERT 表名 SET 列名=xx,...（可用子查询直接SELECT）
+          INSERT 表名 SELECT
+更新记录：UPDATE 表名 SET XX WHERE 条件
+删除记录：DELETE FROM 表名 WHERE 条件
+查找记录：SELECT 列名/* AS 新名字（修改显示时候的列名）FROM 表名 	
+                        WHREE 条件
+                        GROUP BY 列名 ASC(升序 默认)/DESC HAVING 分组条件（必须是出现在前面列名或是一个聚合函数）
+                        ORDER BY 列名 ASC/DESC（排序）(两者一起出现的时候order必须在group后面)
+                        LIMIT 从哪里开始，几条记录（限制记录出来的数量）
+去除多余重复的数据：SELECT 后面加 DISTINCT
+查看查询计划：explain 之后加查询语句
+设置MySQL的字符集：set names 字符集
+---------------------------------------------------------------------------------------------------------------------------
+子查询：IN（需要等于什么） =ANY(满足其中任意一个即可) 
+                            SOME(和ANY差不多...) 
+                            ALL（满足所有的才行）
+连接类型：INNER JOIN(内连接)
+          用法：INNER JOIN 想要连接的表 ON 连接条件 
+          LEFT JOIN(左外连接)
+          RIGHT JOIN(右外连接)用法与上面相同
+创建表时直接将查询结果写入到表里面：正常建表后 + SELECT
+---------------------------------------------------------------------------------------------------------------------------
+字符函数：CONCAT(‘字符一’，‘字符二’)(字符连接) 
+          CONCAT_WS('指定的分隔符'，‘字符一’，‘字符二’)（以指定的分隔符连接）
+          FORMAT(小数，保留几位数)
+          LOWER(‘字符’)(小写) UPPER(‘字符’)(大写)
+          LEFT(‘字符’，要显示几个) RIGHT(‘字符’，要显示几个)
+          LENGTH()(获取字符长度)
+          LTRIM()(删除前导空格) RTRIM()(删除后导空格) TRIM()(删除前后空格) TRIM(LEADING'符号'FROM'字符')（删除前导符号）
+                                                                                TRAILING (删除后续的符号)
+                                                                                BOTH (全删)
+          REPLACE('字符'，‘要替换的字符’，‘替换成什么字符’)
+          SUBSTRING('字符'，‘从哪位起取从1来时’，‘截取几位’)
+          LIKE(字符匹配)‘’（%为任意字符  _为一个字符）（当字符中有%时候 可以LIKE '%1%%' ESCA12）
+          REGEXP(正则表达式)
+数值运算符：CEIL()(向上取整) FLOOR()(向下取整)
+            DIV（整数除法）
+            MOD(取余)
+            POWER('','')幂运算
+            ROUND(数字,要保留小数点后几位)四舍五入
+            TRUNCATE(数字，保留几位)数字截取
+比较运算符和函数：[NOT]BETWEEN 数字 AND 数字是否在范围内符合
+                  [NOT]IN(数字，数字...)是否在这几个数之间
+                  IS[NOT]NULL是否为空
+日期时间函数：NOW()(当前时间)
+              CURDATE()(当前日期) CURTIME(当前时间)
+              DATE_ADD(‘当前时间’，INTERVAL 数字(可为负数) DAY/YEAR/WEEK)(改变时间)
+              DATEDIFF('年-月-日'，‘年-月-日’)间隔时间
+              DATE_FORMAT('日期'，'%m/%d/%y')转化日期格式 大小写有区别
+信息函数：CONNECTION_ID()(连接ID)
+          DATABASE()(当前数据库)
+          LAST_INSERT_ID()(最后插入的记录)
+          USER()(当前用户)
+          VERSION()(当前版本)
+聚合函数：AVG()(平均值) COUNT()(计数)（不能子查询，不能放在WHERE后面，只能放在HAVING后面） MAX()(最大值) MIN()(最小值) SUM()(求和)
+加密函数：MD5() PASSWORD()
+随机函数：RAND()(随机排序)
+---------------------------------------------------------------------------------------------------------------------------
+自定义函数：CREATE FUNCTION 方法名() RETURNS 返回类型 RETURN 函数体 （无参）
+            CREATE FUNCTION 方法名(参数一 数据类型，参数二 数据类型) RETURNS 返回类型 RETURN 函数体 （有参）
+            DROP FUNCTION(删除函数)
+            DELIMITER 符号（以该符号结束语句）
+            CREATE FUNCTION 方法名(参数一 数据类型，参数二 数据类型) RETURNS 返回类型 BRGIN 函数体 END（符合函数）
+---------------------------------------------------------------------------------------------------------------------------
+创建存储过程：类型 IN,表示该参数的值必须在调用存储过程时指点
+                   OUT,表示该参数的值可以被存储过程改变，并且可以返回
+                   INOUT,表示该参数的调用时指定，并且可以被改变和返回
+              用户变量 @xxx
+              DROP PROCEDURE 过程名（）
+              CALL 过程名（调用存储过程）
+              CREATE PROCEDURE 过程名() 完成的内容（无参 ）  
+              CREATE PROCEDURE 过程名（过程类型 参数名 参数类型） BEGIN 存储过程 END      
+              ROW_COUNT()(发生改变的记录)
+--------------------------------------------------------------------------------------------------------------------------- 
+修改存储引擎：在建表后面加ENGINE=MyISAM/InnoDB    
+---------------------------------------------------------------------------------------------------------------------------
+备份数据库：mysqldump -uroot -p123456 -B test E:/MySQLbackup/test.sql
+---------------------------------------------------------------------------------------------------------------------------
+事务：
+关闭自动事务:set autocommit=off
+开启事务:start transaction
+提交:commit
+回滚：rollback
+查看隔离级别：select @@tx_isolation（默认隔离级别  REPEATABLE-READ）
+设置隔离级别：set session transaction isolation level 隔离级别
+---------------------------------------------------------------------------------------------------------------------------
+触发器：
+	创建只有一个执行语句的触发器：
+	create trigger 触发器名 before|after 触发时间
+	on 表名 for each row 执行语句
+	在执行语句中间可以使用new或者old代指刚发生变化的数据 
+	创建多个执行语句的触发器
+	create trigger 触发器名 before|after 触发时间
+	on 表名 for each row
+	begin 
+		执行语句表
+	end
+	删除触发器：drop trigger 触发器名
+	查看触发器：show triggers 
+---------------------------------------------------------------------------------------------------------------------------
+存储过程和函数：
+创建存储过程：
+CREATE PROCEDURE test_pro (IN lwd INT（输入）,OUT count_num INT（输出）)
+READS SQL DATA（还不是很理解这句的含义）
+BEGIN
+SELECT COUNT(*) FROM t_user WHERE name=lwd;
+END
+查看存储过程：show procedure status where db='数据库名'
+调用存储过程：call 存储过程()
+创建存储函数：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       

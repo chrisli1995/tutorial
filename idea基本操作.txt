@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ctrl+alt + v:快速生成对象
+sout+回车：快速生成System.out.println()
+alt+insert: 快速生成set get等方法
+itar+回车：快速生成for循环
+ctrl+f:快速查找替换关键字
+ctrl+o:快速生成父类的方法
+psvm:快速生成main函数
+shift+enter:另起一行
+alt+回车：修补错误
+

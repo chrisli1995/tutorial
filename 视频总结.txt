@@ -1,0 +1,549 @@
+day07-jdbc:
+	java语言操作数据库
+	jdbc是一套规范,oracle公司制定的
+	驱动:jdbc的实现类,由数据库厂商提供
+	使用步骤:
+		1.导入jar包(驱动)
+		2.注册驱动
+			Class.forName("com.mysql.jdbc.Driver");
+		3.获取连接
+			DriverManager.getConnection("jdbc:mysql://loacalhost:3306/dayxx","root","123");
+		4.编写sql
+		5.创建语句执行者
+			PreparedStatement st=conn.prepareStatement(sql);
+		6.设置参数
+			st.setXxx(int 第几个问号,Object 实参);
+		7.执行sql
+			ResultSet rs=st.executeQuery();
+			int i=st.executeUpdate();
+		8.处理结果:
+			if(rs.next()){
+				rs.getXxx(int|String)
+			}
+		9.释放资源
+	/////////////////////////////////
+	properties:
+		形式 key=value
+		获取资源文件里面的内容 ResourceBundle
+		文件放在src下:
+			ResourceBundle bundle = ResourceBundle.getBundle("不带后缀名的文件名");
+			获取值:
+				String value=bundle.getString(key)
+	//////////////////////////
+	
+连接池:
+	必须实现 javax.sql.DataSource 接口
+		获取连接:getConnnection();
+		归还连接:conn.close();
+	方法增前的方式:
+		1.继承
+		2.静态代理
+		3.动态代理
+	静态代理步骤:
+		a.要求装饰者和被装饰者实现同一个接口或者继承同一个类
+		b.要求装饰者要有被装饰者的引用
+		c.对需要加强的方法进行加强
+		d.对不需要加强的方法调用原来的方法
+	常见的连接池:
+		DBCP:
+			使用步骤:
+				1.导入jar包(两个jar包)
+				2.编码:
+					a.硬编码
+						new BasicDataSource()
+					b.配置文件
+						Properties prop=new Properties()
+						prop.load(is);
+						new BasicDataSourceFactory().createDataSource(Properties prop);
+		C3P0:
+			使用步骤:
+				1.导入jar包(1个)
+				2.编码:
+					b.配置文件
+						配置文件的名称:c3p0.properties 或者 c3p0-config.xml
+						配置文件的位置:src目录下
+						编码中通过构造器创建:
+							new ComboPooledDataSource();
+	/////////////////////////////
+dbutils:
+	apache组织提供的一个工具类,jdbc框架.
+	dbutils的使用步骤:
+		1.导入jar包
+		2.创建QueryRunner
+		3.编写sql
+		4.执行sql
+	核心的类或者接口
+		QueryRunner:类  操作sql
+			构造:
+				new QueryRunner(DataSource ds);
+			常用的方法:
+				query(..)
+				update(..)
+		
+		DbUtils:类 释放资源和控制事务
+		ResultSetHandler:接口 封装结果集
+			BeanHandler:将查询的第一条结果封装成指定的bean对象
+			BeanListHandler:将查询的每一条结果封装成指定的bean对象,将所有的对象放入list中返回
+			MapListHandler:将查询的每一条结果封装成map,key是字段名,value是值,将所有的map放入list中返回
+			ScalarHandler:针对于聚合函数 
+			
+day08-xml:
+	可扩展的标签语言
+	标签可以自定义
+	作用:配置文件
+	xml组成:
+		声明 首行顶格写
+		元素 
+			<xxx></xxx>
+			<xx/>
+			
+		属性
+			<xxx attr="value">
+		注释
+			<!--注释内容-->
+		CDATA 原样输出
+			<![CDATA[
+				....
+			]]>
+xml的解析:
+	sax:逐行解析,只能查询
+	dom:一次性将文档加载到内存,形成一棵树,可以进行curd操作
+通过dom4j进行查询操作:
+	1.导入jar包
+	2.获取document
+		Document doc = new SAXReader().read(文件路径);
+	3.获取根节点
+		Element root = doc.getRootElement();
+	4.获取其他节点
+		获取属性节点
+			String value = root.attributeValue("属性名")
+		获取所有的子元素
+			List<Element> list=root.elements()
+		获取子元素的文本节点
+			String text=ele.elementText("子元素名称")
+扩展:xpath
+	api:
+		List<Element> selectNodes("表达式");
+		Element selectSingleNode("表达式");
+///////////////////////////////
+xml约束:
+	作用:规定文档中可以出现那些元素和属性 及他们出现的顺序
+	分类:
+		DTD和SCHEMA
+	DTD:一个xml文档中只能有一个dtd约束
+		只要在文档上面看到<!DOCTYPE> 就说明使用的是dtd约束
+		* ? + , | ()
+	SCHEMA:一个xml文档中可以出现多个schema约束
+		只要在xml文档中看到 xmlns
+//////////////////////
+tomcat
+	web:网页或者资源
+	资源有动态web资源和静态web资源
+	动态的web开发技术:servlet和jsp 等等
+	静态的web开发技术:html css等
+tomcat
+	启动: bin/startup.bat
+	退出: bin/shutdown.bat
+	修改端口号: conf/server.xml
+	存放项目目录:webapps
+web项目目录
+	myweb
+		|
+		|--- html css 图片
+		|
+		|--- WEB-INF(特点:浏览器直接访问不到,通过java程序可以)
+		|		|
+		|		|--- lib
+		|		|--- classes
+		|		|--- web.xml(核心配置文件)
+		|		|
+//////////////////////////////
+发布方式:
+	方式1:将项目放在webapps下
+///////////////
+访问路径:
+	http://主机:端口号/项目名称/资源路径
+	
+day09-http::
+	超文本传输协议
+	请求和响应
+servlet:
+	运行在服务器端的一个java小程序,本质就是一个类
+	接受请求,处理逻辑,生成动态内容
+	编写步骤:
+		1.编写一个类
+			继承HttpServlet
+			重写doGet或者doPost方法
+		2.编写路径
+			<servlet>
+				<serlvet-name>
+				<serlvet-class>
+				
+			<servlet-mapping>
+				<serlvet-name>
+				<url-pattern>
+		3.测试
+			http://主机:端口号/项目名/路径
+	servlet的体系结构:
+		Servlet--->GenericServlet-->HttpServlet
+	HttpServlet:
+		实现了service方法,强转了两个参数,调用了重载的service方法
+		 重载的service方法中,获取请求的方式,根据请求方式的不同调用相应的doXxx方法
+		doGet():处理get请求的逻辑
+		doPostt():处理post请求的逻辑 (只有表单提交的时候把method设置成post的时候)
+	servlet的生命周期:
+		init(ServletConfig config):
+		service(ServletRequest request,ServletResponse response):
+		destroy():
+		
+		
+day10-response:响应
+	往浏览器写东西
+	响应行
+		操作状态码
+		常用方法:
+			setStatus(int code): 1 2 3
+	响应头
+		格式: 
+			key:value(value可以是多个)
+		常用方法:
+			setHeader(String key,String value):设置字符串形式的响应头
+			addHeader(String key,String value):添加字符串形式的响应头 若没有设置则设置,若设置过则追加
+	响应体
+		浏览器展示的内容
+		常用方法:
+			getWriter()
+			getOutputStream()
+		注意:
+			俩流互斥,服务器会把我们关闭
+	//////////////////////////////////////////
+	常见的响应头
+		location:重定向 配合302
+			开发中:response.sendRedirect("路径");
+		refresh:定时刷新 
+			response.setHeader("refresh","秒数;url=路径");//java
+			meta//html
+		content-type:设置文件的mimetype,设置响应流的编码且告诉浏览器用什么编码打开
+			开发中:response.setContentType("text/html;charset=utf-8");
+		content-disposition:设置文件下载
+			response.setHeader("content-disposition","attachment;filename="+文件名称);
+	文件下载:
+		设置两个头一个流
+			content-type
+			content-disposition
+			
+			getOutputStream()
+	//////////////////////////////////////
+request:请求
+	获取从浏览器发送过来数据
+	请求行
+		常用方法:
+			获取项目名:getContextPath()
+	请求头
+		格式:
+			key:value(value可以是多个)
+		常用方法:
+			getHeader(String key)
+	请求参数
+		String getParameter(String key)
+		String[] getParameterValues(String key)
+		Map<String,String[]> getParameterMap()
+		获取参数中文乱码:
+			通用方式:
+				new String(参数.getBytes("iso-8859-1"),"utf-8");
+			针对于post:
+				request.setCharacterEncoding("utf-8");
+	////////////////////
+	常用的头信息:
+		user-agent:获取浏览器内核
+		referer:页面从那里跳转过来
+///////////////////////////
+request域对象:
+	xxxAttribute()
+	请求转发:
+		request.getRequestDispatcher("/内部路径").forward(request,response);
+		
+		
+		
+
+day11-jsp:
+cookie:
+	浏览器端会话技术
+	由服务器产生,生成key=value形式,通过响应头(set-cookie)返回给浏览器,保存在浏览器端
+	下次访问的时候根据一定的规则携带cookie,通过请求头(cookie)携带给服务器.
+	常用方法:
+		构造:
+			new Cookie(String key,String value)
+		写回:
+			response.addCookie(Cookie c)
+		获取:
+			Cookie[] request.getCookies();
+		cookie的api:
+			getName():获取cookie的名称
+			getValue():获取cookie的值
+			setMaxAge(int 秒数);持久化
+				若int为0;删除此cookie(前提必须路径一致)
+			setPath(String path):设置cookie的路径
+				若访问的链接的路径中包含cookie的path,则携带
+	注意:
+		cookie不能跨浏览器
+		cookie不支持中文
+		////////////////////////////
+session:
+	服务器端的会话技术
+	浏览器访问服务器的时候,服务器会获取jsessionid,
+		若获取不到:
+			服务器创建一个session,保存用户数据,将该session的jsessionid通过响应返回给浏览器
+		若获取到:
+			服务器拿着这个jessionid去session池中查找有无此session
+				若查找不到:
+					服务器创建一个session,保存用户数据,将该session的jsessionid通过响应返回给浏览器
+				若查找到:
+					拿过来直接使用,将该session的jsessionid通过响应返回给浏览器
+	常用方法:
+		获取一个session
+			request.getSession();
+		
+	session域对象:
+		xxxAttribute()
+		生命周期:
+			创建:java程序中第一次使用request.getsession方法的时候
+			销毁:
+				服务器非正常关闭
+				session超时
+					默认时间
+					手动设置时间
+				手动删除★
+					session.invalidate();
+	域对象:
+		ServletContext:共享的数据
+		HttpServletRequest:一次请求的数据
+		HttpSession:私有的数据
+		
+		
+		
+		
+
+		
+		
+		
+day12-jsp:
+	java服务器页面
+	jsp的脚本
+	jsp的注释
+		html注释
+		java注释
+		jsp注释
+			<%-- --%>
+	jsp的指令
+		page:声明页面一些属性
+			重要的属性:
+				import
+				pageEncoding
+				contentType
+			了解属性
+				isErrorPage:一旦他的值为true jsp页面就是可以使用exception内置对象
+		include:静态包含,(内容)
+		taglib:导入标签库
+		
+	jsp的内置对象 9个
+		out 
+		request
+		response
+		session
+		
+		exception
+		page
+		config
+		application
+		pageContext
+	jsp的域对象
+		pageContext
+		request
+		session
+		application
+	jsp的动作标签
+		jsp:forward 请求转发
+		jsp:include 动态包含(运行结果)
+el:
+	从jsp2.0使用的内置表达式语言
+	替代<%=...%>
+	作用:
+		1.获取域中的数据
+			简单
+				${域.域中属性名}
+				${域中属性名}:若找不到返回一个""
+				注意:
+					若属性名字中有"."等特殊符号的时候
+						必须使用 ${域["域中属性名"]}
+			复杂
+				数组和list ${域中名称[index]}
+				map 	${域中的名称.键}
+			javabean导航
+				javabean:
+					1.必须公共的类
+					2.私有字段
+					3.提供公共的访问字段的方法  get|set|is
+						一旦提供公共的方法之后,get|set|is后面的名称首字母小写,这个东西称之为bean属性
+							例如:getName()  name就是一个bean属性
+					4.提供一个无参构造器
+					5.一般会实现序列化接口
+					
+				${域中的属性名.bean属性}
+		2.执行运算
+			注意:
+				+
+				empty
+				三元运算符
+	el的内置对象:
+		cookie
+			${cookie.cookie名称.value}
+		pageContext
+			在jsp页面动态的获取项目路径 /day11
+				${pageContext.request.contextPath}
+jstl:
+	jsp 标准标签库
+	apache组织
+	使用步骤:
+		1.导入jar包
+		2.在页面上导入标签库
+	core:核心包
+		c:if 判断
+		c:forEach 循环
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+day13-mvc
+	jsp的设计模式1:
+		jsp+javabean
+	jsp的设计模式2:
+		jsp+javabean+servlet
+			jsp:展示数据
+			javabean:封装数据 封装对数据的访问
+			servlet:处理请求
+	mvc:
+		将业务逻辑 代码 显示相分离
+		M:model 模型 封装数据 封装对数据的访问
+		V:view 	视图 展示数据 目前由jsp担任
+		C:controller 控制 处理请求
+	三层架构:
+		web:
+			作用:
+				展示数据 
+				
+				接受请求
+				调用service
+				页面的跳转,信息的生成
+		service:
+			作用:
+				处理逻辑
+				调用dao
+				
+		dao:
+			作用:
+				对数据库的curd操作
+	/////////////////////////////
+	反射:
+		先获取class对象,无所不能
+	////////////////////	
+事务:
+	一件完整的事情.可以包含多个操作,操作要么成功,要么全部失败
+	mysql中的事务:
+		默认是事务自动提交
+		手动提交:
+			1.关闭自动提交
+			2.手动开启一个事务
+				start transaction;
+				commit;
+				rollback;
+	java中的事务:
+		Connection接口的api
+			setAutoCommit(false):手动的开启一个事务
+			commit():提交
+			rollback():回滚
+	DBUitls使用事务:
+		1.创建QueryRunner
+			new QueryRunner():手动事务 调用他的方法的时候必须手动传入一个连接,连接得手动关闭,事务得手动控制.
+			new QueryRunner(DataSource ds):自动事务 调用他的方法的时候不需要传入一个连接,连接自动关闭,事务自动控制.
+		2.使用的方法 (手动事务)
+			query(...)
+			update(Connection conn .....)
+	事务中要想保证在一个事务中,必须保证使用同一个连接
+		方式1:向下传递连接
+		方式2:将连接和当前线程绑定
+			ThreadLocal
+				常用的方法:
+					set(Object value)
+					Object get()
+					remove()
+	事务的特性:
+		ACID
+		原子性 一致性 隔离性 持久性
+	若不考虑隔离性的时候会发生的问题
+		脏读
+		不可重复读
+		虚读
+	隔离级别:
+		read uncommitted:读未提交 什么问题都避免不了
+		read committed:读已提交 避免脏读
+		repeatable read:可重复读 避免脏读和不可重复读
+		serializable:串行化 避免所有的问题 锁表
+	安全:
+		serializable>repeatable read>read committed>read uncommitted
+	效率
+		serializable<repeatable read<read committed<read uncommitted
+	
+	mysql中默认隔离级别 repeatable read
+	oracle中默认隔离级别 read committed
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+day14-分页:
+	将数据按照页码划分,提高用户的体验度.
+分类:
+	逻辑分页:一次性将内容加载到内存(list),获取自己想要的数据 sublist截取.缺点:维护起来麻烦
+	物理分页:(经常使用) 每次只去查询当前页需要的数据 缺点:和数据库交互多
+mysql: limit
+	格式:
+		select ..... limit m,n;
+			[m+1,m+n]
+	规律:
+		查看第n也数据: limit (n-1)*pageSize,pageSize
+每页中需要的数据:
+	5个
+	当前页内容 list 通过limit查询
+	当前页 currPage 前台传递过来
+	每页显示的条数 pagesize 固定
+	总条数 totalCount count(*)查询
+	总页数 Math.ceil(totalCount*1.0/pageSize)
+封装成一个pagebean
+////////////////////
+在前台展示:
+	1.当前页数据 遍历 pb.list
+	2.展示首页 上一页... 然后给他们添加超链接
+	3.判断是否是第一页 若是:不展示 首页和上一页
+	4.判断是否是最后一页 若是:不展示 尾页和下一页
+	5.将所有的页码展示
+		forEach begin="1" end="${pb.totaoPage}"
+	6.判断是否是当前页
+		若是:则不加超链接
+		若不是:加超链接

@@ -1,0 +1,849 @@
+JDBC:
+jdbc操作步骤:★
+	1.数据库和表
+	2.创建一个项目
+	3.导入驱动jar包
+	4.编码:
+		注册驱动
+		获取连接
+		编写sql
+		创建预编译的语句执行者
+		设置参数
+		执行sql
+		处理结果
+		释放资源
+DriverManager:管理了一组jdbc的操作类
+		常用方法:
+			了解:注册驱动	
+				static void registerDriver(Driver driver) :
+					通过查看 com.mysql.jdbc.Driver的源码 有如下代码
+						 static {
+							try {
+								java.sql.DriverManager.registerDriver(new Driver());//这段代码我们已经写过
+							} catch (SQLException E) {
+								throw new RuntimeException("Can't register driver!");
+							}
+						}
+					驱动注册了两次.我们只需要将静态代码块执行一次,类被加载到内存中会执行静态代码块,并且只执行一次.
+					现在只需要将类加载到内存中即可:
+						方式1:
+							★Class.forName("全限定名");//包名+类名   com.mysql.jdbc.Driver
+						方式2:
+							类名.class;
+						方式3:
+							对象.getClass();
+ 
+			掌握:获取连接
+				static Connection getConnection(String url, String user, String password) 
+					参数1:告诉我们连接什么类型的数据库及连接那个数据库
+								协议:数据库类型:子协议 参数
+						mysql:	jdbc:mysql://localhost:3306/数据库名称
+						oracle:	jdbc:oracle:thin@localhost:1521@实例
+						
+					参数2:账户名 root
+					参数3:密码
+	
+	
+	(了解)Driver:java.sql 接口 驱动
+	Connection:连接 接口
+		常用方法:
+			获取语句执行者:
+				(了解)Statement createStatement() :获取普通的语句执行者  会出现sql注入问题
+				★PreparedStatement prepareStatement(String sql) :获取预编译语句执行者
+				(了解)CallableStatement prepareCall(String sql):获取调用存储过程的语句执行者
+
+			了解:
+				setAutoCommit(false) :手动开启事务
+				commit():提交事务
+				rollback():事务回滚
+	
+	Statement:语句执行者 接口
+	PreparedStatement:预编译语句执行者 接口
+		常用方法:
+			设置参数:
+				setXxx(int 第几个问号,Object 实际参数);
+					常见的方法:
+						 setInt
+						 setString
+						 setObject
+			
+			执行sql:
+				 ResultSet executeQuery() :执行 r 语句 返回值:结果集
+				 int executeUpdate() :执行cud 语句 返回值:影响的行数
+ 
+	
+	ResultSet:结果集 接口
+		执行查询语句之后返回的结果
+			常用方法:
+				boolean next():判断是否有下一条记录,若有返回true且将光标移到下一行,若没有呢则返回false
+					光标一开始处于第一条记录的上面
+				
+				获取具体内容
+					getXxx(int|string)
+						若参数为int :第几列
+						若参数为string:列名(字段名)
+					例如:
+						获取cname的内容可以通过
+							getString(2)
+							getString("cname")
+					常用方法:
+						getInt
+						getString 也可以获取int值
+						getObject 可以获取任意
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+连接池：
+       DBCP:(理解)
+		apache组织
+		使用步骤:
+			1.导入jar包(commons-dbcp-1.4.jar和commons-pool-1.5.6.jar)
+			2.使用api
+				a.硬编码
+					//创建连接池
+					BasicDataSource ds = new BasicDataSource();
+					
+					//配置信息
+					ds.setDriverClassName("com.mysql.jdbc.Driver");
+					ds.setUrl("jdbc:mysql:///day07");
+					ds.setUsername("root");
+					ds.setPassword("1234");
+				b.配置文件
+					实现编写一个properties文件
+					//存放配置文件
+					Properties prop = new Properties();
+					prop.load(new FileInputStream("src/dbcp.properties"));
+					//设置
+					//prop.setProperty("driverClassName", "com.mysql.jdbc.Driver");
+					
+					//创建连接池
+					DataSource ds = new BasicDataSourceFactory().createDataSource(prop);
+	C3P0:(★)
+		hibernate和spring使用
+		有自动回收空闲连接的功能.
+		使用步骤:
+			1.导入jar包(c3p0-0.9.1.2.jar)
+			2.使用api
+				a.硬编码(不推荐)
+					new ComboPooledDataSource()
+				b.配置文件
+					配置文件的名称:c3p0.properties 或者 c3p0-config.xml
+					配置文件的路径:src下
+				
+					编码只需要一句话
+						new ComboPooledDataSource()//使用默认的配置
+						new ComboPooledDataSource(String configName)//使用命名的配置 若配置的名字找不到,使用默认的配置.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+dbutils:
+	是apache组织的一个工具类,jdbc的框架,更方便我们使用
+	使用步骤:
+		1.导入jar包(commons-dbutils-1.4.jar)
+		2.创建一个queryrunner类
+			queryrunner作用:操作sql语句
+				构造方法:
+					new QueryRunner(Datasource ds);
+		3.编写sql
+		4.执行sql
+			query(..):执行r操作
+			update(...):执行cud操作
+
+核心类或接口
+	QueryRunner:类名
+		作用:操作sql语句
+		构造器:
+			new QueryRunner(Datasource ds);
+		注意:
+			底层帮我们创建连接,创建语句执行者 ,释放资源.
+		常用方法:
+			query(..):
+			update(..):
+	
+	DbUtils:释放资源,控制事务 类
+		closeQuietly(conn):内部处理了异常
+		commitAndClose(Connection conn):提交事务并释放连接
+		....
+	
+	ResultSetHandler:封装结果集 接口
+		
+		 ArrayHandler, ArrayListHandler, BeanHandler, BeanListHandler, ColumnListHandler, KeyedHandler, MapHandler, MapListHandler, ScalarHandler
+		 
+		 (了解)ArrayHandler, 将查询结果的第一条记录封装成数组,返回
+		 (了解)ArrayListHandler, 将查询结果的每一条记录封装成数组,将每一个数组放入list中返回
+		 ★★BeanHandler, 将查询结果的第一条记录封装成指定的bean对象,返回
+		 ★★BeanListHandler, 将查询结果的每一条记录封装成指定的bean对象,将每一个bean对象放入list中 返回.
+		 (了解)ColumnListHandler, 将查询结果的指定一列放入list中返回 
+		 (了解)MapHandler, 将查询结果的第一条记录封装成map,字段名作为key,值为value 返回
+		 ★MapListHandler, 将查询结果的每一条记录封装map集合,将每一个map集合放入list中返回
+		 ★ScalarHandler,针对于聚合函数 例如:count(*) 返回的是一个Long值
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+xml解析:
+	解析方式:
+		1.sax:特点:逐行解析,只能查询.
+		2.dom:特点:一次性将文档加载到内容中,形成一个dom树.可以对dom树curd操作
+	解析技术:
+		JAXP：sun公司提供支持DOM和SAX开发包
+		JDom：dom4j兄弟
+		jsoup：一种处理HTML特定解析开发包
+		★dom4j：比较常用的解析开发包，hibernate底层采用。
+	dom4j技术进行查询操作.
+		使用步骤:
+			1.导入jar包
+			2.创建一个核心对象 SAXReader
+				new SAXReader();
+			3.将xml文档加载到内存中形成一棵树
+				Document doc=reader.read(文件)
+			4.获取根节点
+				Element root=doc.getRootElement();
+			5.通过根节点就可以获取其他节点(文本节点,属性节点,元素节点)
+				获取所有的子元素
+					List<Element> list=root.elements()
+				获取元素的指定属性内容
+					String value=root.attributeValue("属性名");
+				获取子标签标签体:遍历list 获取到每一个子元素
+					String text=ele.elementText("子标签名称")
+					
+	xpath解析技术:(扩展)
+		依赖于dom4j
+			使用步骤:
+				1.导入jar包(dom4j和jaxen-1.1-beta-6.jar)
+				2.加载xml文件到内存中
+				3.使用api
+					selectNode("表达式");
+					selectSingleNode("表达式");
+			表达式的写法:
+				/ 从根节点选取 
+				// 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置 
+				例如一个标签下有一个id属性且有值  id=2;
+					//元素名[@属性名='属性值']
+					//元素名[@id='2']
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+tomcat:
+	下载:
+		.tar .tar.gz: 提供给linux系统
+		.zip .exe:提供给window系统
+	安装:
+		解压apache-tomcat-7.0.52.zip即可
+		
+	启动:
+		tomcat/bin目录下
+		双击 startup.bat
+		打开浏览器:
+			http://localhost:8080
+	退出:
+		方式1:点 x
+		方式2:ctrl+c
+		方式3:双击 shutdown.bat
+			
+	常见问题(配置):
+		1.启动的时候一闪而过 	正确配置:JAVA_HOME
+		2.端口冲突问题
+			修改tomcat的端口号.
+				打开tomcat/conf/server.xml
+				大概70行左右 有如下代码:
+					 <Connector port="8080" protocol="HTTP/1.1"
+						   connectionTimeout="20000"
+						   redirectPort="8443" />
+				修改port后面的值就可以了.注意:1024以下的端口号留给系统用的
+				80端口是留给http协议用的.我们可以使用这个端口号
+		3.有可能出现的问题(在环境变量中配置CATALINA_HOME)
+			删除
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+	tomcat目录结构:(了解)
+		bin:存放的可执行程序
+		conf:配置文件
+		lib:存放的是tomcat和项目运行时需要的jar包
+		logs:日志 注意:catalina
+		temp:临时文件
+		★★webapps:存放项目的目录
+		★work:存放jsp文件在运行时产生的java和class文件
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+	web项目的目录结构:★★★
+		myweb(项目名称)   web2.5版本标准的目录结构
+			|
+			|---- html css js image等目录或者文件
+			|
+			|---- WEB-INF(特点:通过浏览器直接访问不到 目录)
+			|	 	|
+			|	 	|--- lib(项目的第三方jar包)
+			|	 	|--- classes(存放的是我们自定义的java文件生成的.class文件)
+			|	 	|--- web.xml(当前项目的核心配置文件)
+			|	 	|
+	
+	访问路径:
+		http://主机:端口号/项目名称/资源路径
+		例如:我的项目 myweb 
+			资源 myweb有一个1.html
+		http://localhost:80/myweb/1.html
+	/////////////////////////////
+	常用的项目发布方式:(虚拟目录映射)
+		★方式1:将项目放到tomcat/webapps下
+		(了解)方式2:修改 tomcat/conf/server.xml
+			大概130行:
+				在host标签下 添加如下代码
+					<Context path="/项目名" docBase="项目的磁盘目录"/>
+				例如:
+					<Context path="/my" docBase="G:\myweb"/>
+		(了解)方式3:
+			在tomcat/conf/引擎目录/主机目录下 新建一个xml文件
+				文件的名称就是项目名 文件的内容如下:
+					<Context docBase="G:\myweb"/>
+状态码:
+			200 正常响应成功
+			302 重定向
+			304 读缓存
+			404 用户操作资源不存在
+			500 服务器内部异常
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+servlet:
+动态的web开发技术,本质就是一个类,运行在服务器端的一个java小程序
+	处理业务逻辑,生成动态web内容
+编写一个servlet步骤:
+	1.编写一个类
+		a.继承HttpServlet
+		b.重写doGet或者doPost方法
+	2.编写配置文件(web-inf/web.xml)
+		a.注册servlet
+		b.绑定路径
+	3.访问
+		http://主机:端口号/项目名/路径(idea没有项目名 格式为localhost:8080/hello)
+接受参数:  格式:key=value
+	Sting value=request.getParameter("key")
+	例如: http://localhost/day09/hello?username=tom
+		request.getParameter("username")就可以获取tom值
+回写内容:
+	response
+	response.getWriter().print("success");
+	处理响应数据中文乱码:
+		resp.setContentType("text/html;charset=utf-8"); //建议大家放在方法中的第一行
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+登入：
+    1.先有数据库和表
+	2.创建工程
+	3.复制页面
+		修改login.html
+			给用户名和密码添加name属性
+			修改表单的action属性
+				action="http://localhost/day0901/login"
+			添加method属性
+				method="post"
+	4.导入jar包:
+		驱动 dbutils c3p0
+	5.导入工具类和配置文件
+		datasourceUtils
+		c3p0-config.xml(注意修改数据名称)
+	6.创建servlet(LoginServlet: 路径 /login)
+		接受用户名和密码
+		调用service层(UserService)完成登录操作
+		提示信息
+	7.UserService
+		login(username,password)
+			调用dao
+	8.dao
+		通过用户名和密码查询数据库
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+servlet生命周期 ★★★
+	void init(ServletConfig config):初始化
+	 * 初始化方法
+	 * 执行者:服务器
+	 * 执行次数:一次
+	 * 执行时机:默认第一次访问的时候
+	void service(ServletRequest request,ServletResponse response):服务 处理业务逻辑
+	 * 服务
+	 * 执行者:服务器
+	 * 执行次数:请求一次执行一次
+	 * 执行时机:请求来的时候
+	void destroy():销毁
+	 * 销毁
+	 * 执行者:服务器
+	 * 执行次数:只执行一次
+	 * 执行时机:当servlet被移除的时候或者服务器正常关闭的时候
+	 
+	 serlvet是单实例多线程
+	 默认第一次访问的时候,服务器创建servlet,并调用init实现初始化操作.并调用一次service方法
+	 每当请求来的时候,服务器创建一个线程,调用service方法执行自己的业务逻辑
+	 当serlvet被移除的时候服务器正常关闭的时候,服务器调用servlet的destroy方法实现销毁操作.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+ServletContext:理解
+	上下文(全局管理者)
+	一个项目的引用.代表了当前项目.
+	当项目启动的时候,服务器为每一个web项目创建一个servletcontext对象.
+	当项目被移除的时候或者服务器关闭的时候servletcontext销毁
+	作用:
+		1.获取全局的初始化参数
+		2.共享资源(xxxAttribute)
+		3.获取文件资源
+		4.其他操作
+	获取servletcontext:
+		方式1:了解 
+			getServletConfig().getServletContext()
+		方式2:
+			getServletContext()
+	常用方法:
+		1.了解
+			String  getInitParameter(String key):通过名称获取指定的参数值
+			Enumeration getInitParameterNames() :获取所有的参数名称	
+			 在根标签下有一个 context-param子标签 用来存放初始化参数
+				<context-param>
+					<param-name>encoding</param-name>
+					<param-value>utf-8</param-value>
+				</context-param>
+		2.xxxAttribute
+		3.
+			String getRealPath(String path):获取文件部署到tomcat上的真实路径(带tomcat路径)
+				getRealPath("/"):D:\javaTools\apache-tomcat-7.0.52\webapps\day09\
+			InputStream getResourceAsStream(String path):以流的形式返回一个文件
+		4.获取文件的mime类型  大类型/小类型
+			String getMimeType(String 文件名称)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+域对象:★★★
+	servletcontext
+	当成map集合
+		常用方法:
+			xxxAttribute()
+	servletcontext创建和销毁:
+		当项目启动的时候,服务器为每一个web项目创建一个servletcontext对象.
+		当项目被移除的时候或者服务器关闭的时候servletcontext销毁
+	存放:
+		共享的数据
+////////////////////////
+////////////////////////
+////////////////////////
+////////////////////////
+获取文件的路径:
+	通过类加载器获取文件:2.txt 放在classes目录下无论是java项目还是web项目都可以
+		类.class.getClassLoader().getResource("2.txt").getPath()
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\
+要求:会使用request和response
+案例1-文件下载案例
+技术分析:
+	response
+	文件下载
+//////////////////////
+response:响应
+	作用:
+		往浏览器写东西
+	组成部分:
+		响应行 响应头 响应体
+	操作响应行 
+		格式:
+			协议/版本 状态码 状态码说明
+		状态码:
+			1xx:已发送请求
+			2xx:已完成响应
+				200:正常响应
+			3xx:还需浏览器进一步操作
+				302:重定向 配合响应头:location
+				304:读缓存
+			4xx:用户操作错误
+				404:用户操作错误.
+				405:访问的方法不存在
+			5xx:服务器错误
+				500:内部异常
+		常用方法:
+			setStatus(int 状态码):针对于 1 2 3 
+			了解 :
+				sendError(int 状态码):针对于 4xx和5xx
+	操作响应头 
+		格式:key/value(value可以是多个值)
+		常用的方法:
+			setHeader(String key,String value):设置字符串形式的响应头
+			了解:setIntHeader(String key,int value):设值整形的响应头
+			了解:setDateHeader(String key,long value):设值时间的响应头
+			只能设置一个
+			
+			addHeader(String key,String value):添加置字符串形式的响应头 之前设置过则追加,若没有设置过则设置
+			了解:addIntHeader(String key,int value):添加整形的响应头
+			了解:addDateHeader(String key,long value):添加时间的响应头
+		常用的响应头:
+			location:重定向
+			refresh:定时刷新
+			content-type:设置文件的mime类型,设置响应流的编码及告诉浏览器用什么编码打开
+			content-disposition:文件下载
+			
+			重定向:	
+				方式1:
+					★response.sendRedirect("/day10/loc2");
+				方式2:
+					response.setStatus(302);
+					respooen.setHeader("location","/day10/loc2");
+					
+			定时刷新:
+				方案1:设置头 refresh 昨天做过
+					respooen.setHeader("refresh","秒数;url=跳转的路径");
+				方案2:http的meta标签
+					<meta http-equiv="refresh" content="3;url=/day10/refresh2.html">
+					
+		/////////////////////	
+	操作响应体:
+		页面上要展示的内容
+		常用方法:
+			Writer getWriter():字符流
+			ServletOutputStream getOutputStream() :字节流
+			
+			自己写的东西用字符流,其他一概用字节流.
+			
+		处理响应中文乱码:
+			方式1:★
+				response.setContentType("text/html;charset=utf-8");
+			方式2:理解
+				response.setHeader("content-type", "text/html;charset=utf-8");
+	
+		注意:
+			两个流互斥
+			当响应完成之后,服务器会判断一下流是否已经关闭,若没有关闭,服务器会帮我们关闭.(底层使用的缓冲流)
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+request:请求
+	作用:获取浏览器发送过来的数据
+	组成部分:
+		请求行 请求头 请求体
+	操作请求行 
+		格式:
+			请求方式 请求资源 协议/版本
+		常用方法:HttpServletRequest
+			掌握
+				String getMethod():获取请求方式
+				String getRemoteAddr():获取ip地址
+				String getContextPath() :在java中获取项目名称  (/day10)
+ 
+			
+			了解:
+				getRequestURI():获取的是 从项目名到参数之前的内容  /day10/regist
+				getRequestURL():获取的带协议的完整路径   http://localhost/day10/regist
+				String getQueryString():get请求的所有参数   username=tom&password=123
+				String getProtocol():获取协议和版本
+				
+		例如:请求行
+			GET /day10/row?username=tom&password=123 HTTP/1.1
+		//////////////////		
+	操作请求头 
+		格式:key/value(value可以是多个值)
+		常用方法:
+			★String getHeader(String key):通过key获取指定的value (一个)
+			
+			了解:
+				Enumeration getHeaders(String name) :通过key获取指定的value(多个)
+				Enumeration getHeaderNames() :获取所有的请求头的名称
+				int getIntHeader(String key):获取整型的请求头
+				long getDateHeader(String key):获取时间的请求头
+		重要的请求头:
+			user-agent:浏览器内核 msie firefox chrome
+			referer:页面从那里来 防盗链
+ 
+		///////////////////
+	操作请求参数 ★
+		username=tom&password=123&hobby=drink&hobby=sleep
+		常用方法:
+			String getParameter(String key):获取一个值
+			String[] getParameterValues(String key):通过一个key获取多个值
+			Map<String,String[]> getParameterMap():获取所有的参数名称和值
+			
+			
+		username:tom
+		---------values---------
+		hobby:[drink, sleep]
+		=====map=======
+		username::[tom]
+		password::[123]
+		hobby::[drink, sleep]
+	//////////////////////
+	请求的中文乱码:
+		对于get请求:参数追加到地址栏,会使用utf-8编码,服务器(tomcat7)接受到请求之后,使用iso-8859-1解码,所以会出现乱码
+		对于post请求,参数是放在请求体中,服务器获取请求体的时候使用iso-8859-1解码,也会出现乱码
+		
+		通用的方法:
+			new String(参数.getBytes("iso-8859-1"),"utf-8");
+		针对于post请求来说:只需要将请求流的编码设置成utf-8即可
+			request.setCharacterEncoding("utf-8");
+/////////////////////////////////////////////////////////////
+域对象:
+	request:
+		创建:一次请求来的时候
+		销毁:响应生成的时候
+		作用:
+			一次请求里面的数据
+		请求转发(请求链,请求串)
+			request.getRequestDispatcher("内部路径").forward(request,response);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+案例2-步骤分析:
+	1.数据库和表(day09)
+	2.页面(表单)
+		给每个字段添加name属性
+		还需修改表单提交的路径 method=post
+	3.表单提交到一个servlet(RegistServlet)
+	4.RegistServlet:
+		操作:
+			接受数据,封装成一个user
+			调用UserSerivce完成保存操作  int regist(User user)
+			判断结果是否符合我们预期
+				若int=1; 插入成功
+				若int!=1; 插入失败
+			相应的提示信息在当前的servlet不做处理,将信息转发给另一个servlet展示(MsgServlet);
+	5.UserService
+		调用dao
+	6.userdao 通过dbutils在数据库中插入一条记录.
+//////////////////
+封装对象:
+	apache提供的一个工具类
+		BeanUtils
+			封装数据
+			使用步骤:
+				1.导入jar包
+				2.调用 BeanUtils.populate(Object bean,Map<> 参数);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+cookie:
+	小饼干 小甜点
+	cookie是由服务器生成,通过response将cookie写回浏览器(set-cookie),保留在浏览器上,
+	下一次访问,浏览器根据一定的规则携带不同的cookie(通过request的头 cookie),我们服务器就可以接受cookie
+	cookie的api:
+		new Cookie(String key,String value)
+	写回浏览器:
+		response.addCookie(Cookie c)
+	获取cookie:
+		Cookie[] request.getCookies()
+	cookie的常用方法:
+		getName():获取cookie的key(名称)
+		getValue:获取指定cookie的值
+		注意:
+	cookie不能跨浏览器
+	cookie中不支持中文
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+session:
+	服务器端会话技术.
+	当我们第一次访问的服务器的时候,服务器获取id,
+		能获取id
+			要拿着这个id去服务器中查找有无此session
+				若查找到了:直接拿过来时候,将数据保存,需要将当前sessin的id返回给浏览器
+				若查找不到:创建一个session,将你的数据保存到这个session中,将当前session的id返回给浏览器
+		不能获取id
+			创建一个session,将你的数据保存到这个session中,将当前session的id返回给浏览器
+	
+	获取一个session:
+		HttpSession  request.getSession()
+	
+	域对象:
+		xxxAttribute
+		生命周期:
+			创建:第一次调用request.getsession()创建
+			销毁:
+				服务器非正常关闭
+				session超时
+					默认时间超时:30分钟  web.xml有配置 
+					手动设置超时:setMaxInactiveInterval(int 秒) 了解
+				手动干掉session
+					★session.invalidate()
+		存放的私有的数据.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+JSP没怎么学。。。
+没有东西
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+mvc思想
+	servlet-->缺点:生成html内容太麻烦
+		|
+	jsp--->缺点:阅读起来不方便,维护比较困难
+		|
+	jsp+javabean:
+			jsp的model1:
+				jsp:接受请求,展示数据
+				javabean:和数据打交道 
+		|
+	jsp+javabean+servlet
+			jsp的model2:
+				jsp:展示数据
+				javabean:和数据打交道
+				servlet:接受请求,处理业务逻辑
+			就是MVC思想的体现
+MVC:
+	就是将业务逻辑,代码,显示相分离的一种思想
+	M:model 模型 作用:主要是封装数据,封装对数据的访问
+	V:view 	视图 作用:主要是用来展示数据 一般是jsp担任的
+	C:ctrl	控制 作用:接受请求,找到相应的javabean完成业务逻辑
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+反射:
+	1.获取class对象
+		方式1:
+			Class clazz=Class.forName("全限定名")
+		方式2:
+			Class clazz=类名.class;
+		方式3:
+			Class clazz=对象.getClass;
+	2.可以获取对应类的构造方法(了解)
+		Constructor con = clazz.getConstructor(Class .. paramClass);
+		Person p = (Person) con.newInstance(参数);
+	3.可以通过clazz创建一个对象(了解)
+		clazz.newInstance();//相当于调用的无参构造器
+	4.可以通过clazz获取所有的字段 getFiled()(了解中的了解)
+	5.可以通过clazz获取所有的方法
+		Method m = clazz.getMethod("sleep");//获取公共的方法
+		Method m = clazz.getDeclaredMethod("sleep");//获取任意的方法
+		
+		注意:若是私有的方法 必须让该方法可以访问
+			m.setAccessible(true);
+	6.Method对象的invoke是有返回值,他的返回值就是目标方法执行的返回值
+总结:
+	有了class对象之后,无所不能.6666666666666
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	分层:javaee的三层架构
+	web
+		作用:
+			展示数据 ----jsp
+			
+			
+			-----servlet-------
+			接受请求
+			找到对应的service,调用方法 完成逻辑操作
+			信息生成或者页面跳转
+	service 业务层
+		作用:
+			完成业务操作
+			调用dao
+	dao(data access object 数据访问对象)
+		作用:
+			对数据库的curd操作
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+事务:
+	就是一件完整的事情,包含多个操作单元,这些操作要么全部成功,要么全部失败.
+	例如:转账
+		包含转出操作和转入操作.
+	mysql中的事务:
+		mysql中事务默认是自动提交,一条sql语句就是一个事务.
+		开启手动事务方式
+			方式1:关闭自动事务.(了解)
+				set autocommit = off;
+			方式2:手动开启一个事务.(理解)
+				start transaction;-- 开启一个事务
+				commit;-- 事务提交
+				rollback;-- 事务回滚
+		扩展:
+			oracle中事务默认是手动的,必须手动提交才可以.
+		
+		例如:创建数据库和表
+			create database day13;
+			use day13;
+			create table account(
+				name varchar(20),
+				money int
+			);
+			
+			insert into account values('aa','1000');
+			insert into account values('bb','1000');
+			
+		完成 aa给bb转500;
+			update account set money = money - 500 where name='aa';
+			update account set money = money + 500 where name='bb';
+		////////////////////
+	java中的事务:
+		Connection接口的api:★
+			setAutoCommit(false);//手动开启事务
+			commit():事务提交
+			rollback():事务回滚
+		
+		扩展:了解 Savepoint还原点
+			void rollback(Savepoint savepoint) :还原到那个还原点
+			Savepoint setSavepoint() :设置还原点
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+事务总结:
+	事务的特性:★★★
+		ACID
+		原子性:事务里面的操作单元不可切割,要么全部成功,要么全部失败
+		一致性:事务执行前后,业务状态和其他业务状态保持一致.
+		隔离性:一个事务执行的时候最好不要受到其他事务的影响
+		持久性:一旦事务提交或者回滚.这个状态都要持久化到数据库中
+	不考虑隔离性会出现的读问题★★
+		脏读:在一个事务中读取到另一个事务没有提交的数据
+		不可重复读:在一个事务中,两次查询的结果不一致(针对的update操作)
+		虚读(幻读):在一个事务中,两次查询的结果不一致(针对的insert操作)
+	通过设置数据库的隔离级别来避免上面的问题(理解)
+		read uncommitted  	读未提交	上面的三个问题都会出现
+		read committed  	读已提交	可以避免脏读的发生
+		repeatable read		可重复读	可以避免脏读和不可重复读的发生
+		serializable		串行化		可以避免所有的问题
+	
+	
+	了解
+		演示脏读的发生:
+			将数据库的隔离级别设置成 读未提交
+				set session transaction isolation level read uncommitted;
+			查看数据库的隔离级别
+				select @@tx_isolation;
+		避免脏读的发生,将隔离级别设置成  读已提交
+			set session transaction isolation level read committed;
+			不可避免不可重复读的发生.
+		
+		避免不可重复读的发生 经隔离级别设置成 可重复读
+			set session transaction isolation level  repeatable read;
+			
+		演示串行化 可以避免所有的问题
+			set session transaction isolation level  serializable;
+			锁表的操作.
+		
+	四种隔离级别的效率
+		read uncommitted>read committed>repeatable read>serializable
+	四种隔离级别的安全性
+		read uncommitted<read committed<repeatable read<serializable
+		
+	开发中绝对不允许脏读发生.
+		mysql中默认级别:repeatable read
+		oracle中默认级别:read committed
+
+	java中控制隔离级别:(了解)
+		Connection的api
+			void setTransactionIsolation(int level) 
+				level是常量
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+day14内容主要为案列 并无太多笔记
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
