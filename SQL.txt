@@ -159,10 +159,81 @@ END
 查看存储过程：show procedure status where db='数据库名'
 调用存储过程：call 存储过程()
 创建存储函数：
-
-
-
-
+CREATE FUNCTION test_fun(id1 INT)
+RETURNS VARCHAR(20)（返回参数的类型）
+BEGIN
+	RETURN (SELECT name FROM t_user WHERE id=id1);
+END
+变量的使用：
+（1）变量的定义
+declare 变量1，变量2 变量类型 （放在存储过程里面）
+ex：DECLARE a,b VARCHAR(20);
+（2）为变量赋值
+set 变量1=值，变量2=值
+ex：SET a='jc',b='123';
+或者 用select username,password into a,b from t_user where id=1
+（*）游标的使用：
+（1）声明游标
+declare 游标名称 cursor for 查询语句
+ex：DECLARE cur_t_user2 CURSOR FOR SELECT name,password FROM t_user2;
+（2）打开游标
+open 游标名称
+（3）使用游标
+fetch 游标名称 into a,b
+（4）关闭游标
+流程控制：
+（1）if语句
+语法if（条件） then 语句; 
+	else 语句;
+	end if;
+ex:	IF @num>0 THEN UPDATE t_user_expand SET name='jc' WHERE id=id;
+	ELSE
+	INSERT INTO t_user_expand VALUES(NULL,'wwx');
+	END IF;
+（2）case语句
+语法case 参数
+	when 参数等于的值 then 语句（可多条）;
+	else 参数等于的值 then 语句;
+	end case;
+ex：CASE @num
+	WHEN 1 THEN UPDATE t_user_expand SET name='jc' WHERE id=id;
+	WHEN 0 THEN INSERT INTO t_user_expand VALUES(NULL,'wwx');
+	ELSE INSERT INTO t_user_expand VALUES(NULL,'lyc');
+	END CASE;
+（3）loop、leave语句
+ex：aaa:LOOP
+		SET totalNum=totalNum-1;
+		IF totalNum=0 THEN LEAVE aaa;
+		ELSE INSERT INTO t_user VALUES(NULL,'jc','123456');
+		END IF;
+	END LOOP aaa;
+（4）iterate语句
+语法iterate loop名 用于在循环内部跳出循环 直接进行下一次循环
+（5）repeat语句
+与loop相似，也是用于循环
+ex：REPEAT
+		SET totalNum=totalNum-1;
+		INSERT INTO t_user VALUES(NULL,'lyc','123456');
+		UNTIL totalNum=1
+	END REPEAT;
+（6）while语句
+也与loop相似 用于循环 可以常用
+ex：WHILE totalNum>0 DO
+		INSERT INTO t_user VALUES(NULL,'ht','123456');
+		SET totalNum=totalNum-1;
+	END WHILE;
+调用存储函数：
+call 存储过程名（参数）
+调用函数：
+直接写
+查看存储过程和函数：
+(1)show procedure status like'pro_user';
+(2)show create procedure 存储过程名
+(3)从information_schema中的routines表查看
+修改存储过程和函数：
+alter procedure 过程名 comment'我来测试一个comment'
+删除存储过程和函数：
+drop 过程名或者函数名
 
 
 

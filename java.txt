@@ -1,0 +1,61 @@
+进程和线程：
+进程是一个正在执行的程勋
+每一个进程执行都有一个执行顺序。该顺序是一个执行路径，或者叫叫一个控制单元
+
+线程就是进程中的一个独立控制单元
+线程在控制着进程的执行
+一个进程中至少有一个线程
+---------------------------------------------------------------------------------------------------------------------------
+集合：
+与数组的区别：
+数组需要定长 且类型固定
+这么多“容器”的意义：
+每一个对数据的存储方式（数据结构）都有不同
+共性方法：
+ boolean add(E e) 
+          确保此 collection 包含指定的元素（可选操作）。 
+ boolean addAll(Collection<? extends E> c) 
+          将指定 collection 中的所有元素都添加到此 collection 中（可选操作）。 
+ void clear() 
+          移除此 collection 中的所有元素（可选操作）。 
+ boolean contains(Object o) 
+          如果此 collection 包含指定的元素，则返回 true。 
+ boolean containsAll(Collection<?> c) 
+          如果此 collection 包含指定 collection 中的所有元素，则返回 true。 
+ boolean equals(Object o) 
+          比较此 collection 与指定对象是否相等。 
+ int hashCode() 
+          返回此 collection 的哈希码值。 
+ boolean isEmpty() 
+          如果此 collection 不包含元素，则返回 true。 
+ Iterator<E> iterator() 
+          返回在此 collection 的元素上进行迭代的迭代器。 
+ boolean remove(Object o) 
+          从此 collection 中移除指定元素的单个实例，如果存在的话（可选操作）。 
+ boolean removeAll(Collection<?> c) 
+          移除此 collection 中那些也包含在指定 collection 中的所有元素（可选操作）。 
+ boolean retainAll(Collection<?> c) 
+          仅保留此 collection 中那些也包含在指定 collection 的元素（可选操作）。 
+ int size() 
+          返回此 collection 中的元素数。 
+ Object[] toArray() 
+          返回包含此 collection 中所有元素的数组。 
+<T> T[] 
+ toArray(T[] a) 
+          返回包含此 collection 中所有元素的数组；返回数组的运行时类型与指定数组的运行时类型相同。 
+ps:集合中存储的都是对象的地址或者引用
+迭代器：Iterator 可以使用集合里面的元素 每一个容器的数据结构不同 所以取出的动作细节不一样，但都是判断和取出，所以构造了迭代器
+
+
+
+
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+
+		  
+		  
