@@ -57,6 +57,84 @@ ha.cf:Heartbeat参数配置文件，主要是一些基本参数
 authkey:Heartbeat认证文件，高可用服务器之间根据对端的authkey，对对端进行认证
 haresource:Heartbeat资源配置文件，如配置IP资源及脚本程序等
 
+具体实现步骤
+1、配置网卡（测试需要双网卡）
+
+2、配置主机名
+hostname data-1-1 
+sed -i 's#HOSTNAME=moban#HOSTNAME=data-1-1#g' /etc/sysconfig/network另一台可以叫data-1-2
+
+3、配置host
+cp /etc/hosts /etc/hosts.bak001 备份（复制）hosts文件
+sed -i '/^192.168.149/d' /etc/hosts 把原来的文件删掉
+[root@data-1-1 etc]# cat >>/etc/hosts<<eof
+> 192.168.149.130 data-1-1
+> 192.168.149.133 data-1-2
+> eof
+
+4、配置心跳连接
+添加路由：
+data-1-1：
+route add -host 192.168.149.134 dev eth1  从data -1-1上访问192.168.149.134，走eth1网卡出去，即使用心跳线路
+data-1-2同理
+添加完以后可以查看route -n
+设置为自启动
+echo '/sbin/route add -host 192.168.149.132 dev eth1'>>/etc/rc.local   rc.local是给用户自定义启动时需要执行的文件。
+以上就是基本的配置，下面就是开始配置heartbeat
+
+建一个专门的tools文件夹  mkdir /home/tools -p
+安装epel包（因为yum安装没有heartbeat）
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+rpm -ivh epel-release-7-11.noarch.rpm
+rpm -qa |grep epel 查看rpm文件
+可以查看下是否有heartbeat yum search heartbeat
+安装heartbeat yum intall heartbeat* -y
+
+发现这样做 yum中依然没有heartbeat 只存在heartbeat中的一个组件Resource Agents
+采用源码将Reusable-Cluster-Components-glue和HeartBeat安装在系统上，当然相应的文件路径会有不同
+拷贝三个配置文件
+mkdir /usr/local/heartbeat/etc/ha.d -p 把配置文件放这里面
+# cp  /usr/local/heartbeat/share/doc/heartbeat/ha.cf  /usr/local/heartbeat/etc/ha.d
+# cp /usr/local/heartbeat/share/doc/heartbeat/authkeys /usr/local/heartbeat/etc/ha.d
+# cp  /usr/local/heartbeat/share/doc/heartbeat/haresources /usr/local/heartbeat/etc/ha.d
+三个配置文件的基本参数（ha.cf、authkey、haresource）在印象笔记中有
+对三个文件进行配置
+ha.cf
+#start
+debugfile /var/log/ha-debug
+logfile /var/log/ha-log
+logfacility local1
+
+keepalive 2
+deadtime 30
+warntime 10
+initdead 60
+
+#bcast eth1
+mcast eth0 225.0.0.130 694 1 0
+
+auto_failback on
+node data-1-1
+node data-1-2
+crm no
+#end 
+
+authkey
+auth 1
+1 sha1 47e9336850f1db6fa58bc470bc9b7810eb397f04 
+
+haresources
+data-1-1 IPaddr::192.268.149.17/24/eth0
+data-1-2 IPaddr::192.168.149.18/24/eth0
+
+启动heartbeat 
+cp /etc/ha.d/shellfuncs /usr/local/heartbeat/etc/ha.d 安装完成后文件不在init.d中
+/etc/init.d/heartbeat start或者service heartbeat start/status
+
+
+
+
+
 
 
 

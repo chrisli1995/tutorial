@@ -1,0 +1,31 @@
+测试环境是在Ubuntu16.04上面
+
+在安装caffe之前需要一些依赖包
+sudo apt-get update
+sudo apt-get install build-essential cmake git pkg-config
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler
+sudo apt-get install libatlas-base-dev
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+sudo apt-get install libopencv-dev
+ps:libprotobuf-dev：caffe所用的一个库
+libleveldb-dev：用于图片压缩
+libatlas-base-dev：用于矩阵运算
+
+安装git
+sudo apt-get install git(好像默认安装了一个)
+创建一个目录：
+cd /home/lwd/
+mkdir caffe
+cd caffe
+git init
+clone项目
+git clone http://github.com/intel/caffe.git
+
+在Makefile.config文件中修改
+INCLUDE_DIRS := $(PYTHON_INCLUDE) ${SERIAL_HDF5_INCLUDE} /usr/local/include /usr/include/hdf5/serial
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+
+编译caffe make all -j4
+
+定义别名：alias anaconda="/home/lwd/anaconda3/bin/python3.6"

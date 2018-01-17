@@ -1,0 +1,54 @@
+/usr/local/bin/charm
+定义变量是直接定义的
+ex：a = 10
+
+判断语句 注意必须缩进 Python识别utf-8的方式是在头部加# coding=utf-8
+ex:score= 90
+	if score>=80:
+		print("很好")
+	elif score>=60:
+		print("及格")
+	else:
+		print("不及格")
+
+循环语句for i in range(0,100):
+		print(i)
+		//python不像Java那样支持字符串拼接 他的方式是print("item {0}".format(i))、print("item {0},{1}".format(i,"hello python"))
+		
+定义函数
+ex: def sayhello():
+		print("hello world")
+	sayhello()//不要有缩进，不然不是调用，而是还在函数内部
+	
+	def max(a,b)
+		if a>b:
+			return a
+		else:
+			return b
+
+	print(max(1,2))
+
+面向对象
+ex:class Hello:
+		def _init_(self,name)：
+			self.name=name
+		def sayhello(self):
+			print("hello {0}".format(self._name))
+继承：clss Hi(Hello):
+			def _init_(self,name):
+				Hello._init_(self,name)
+			def sayHi(self):
+				print(Hi {0}.format(self._name))
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
