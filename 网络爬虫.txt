@@ -1,0 +1,110 @@
+requests库
+安装方法：pycharm可以直接安装 网上方法也比较多
+也可以导入from urllib.request import urlopen但没有requests稳定
+ex：import requests
+	import webbrowser
+	pa={"wd":"李蔚栋"}
+	r=requests.get('https://www.baidu.com/s',params=pa)
+	print(r.url)
+	webbrowser.open(r.url)
+ex：import requests
+	import webbrowser
+	data={'firstname':'wd','lastname':'l'}
+	r=requests.post('http://pythonscraping.com/pages/files/processing.php',data=data)
+	print(r.text)
+ex：import requests
+	import webbrowser
+	file={'uploadFile':open('./image.png','rb')}
+	r=requests.post('http://pythonscraping.com/pages/files/processing2.php',files=file)
+	print(r.text)
+ex：import requests
+	import webbrowser
+	payload={'username':'lwd','password':'123456'}
+	r=requests.post('http://pythonscraping.com/pages/cookies/welcome.php',data=payload)
+	print(r.cookies.get_dict())
+	r=requests.get('http://pythonscraping.com/pages/cookies/profile.php',cookies=r.cookies)
+	print(r.text)
+
+------------------------------------------------------------------------------------------------------------------------------------	
+BeautifulSoup库
+能够代替正则表达式更好的解析获取的HTML
+ex：from bs4 import BeautifulSoup
+	from urllib.request import urlopen
+	html=urlopen("http://www.baidu.com").read().decode('utf-8')
+	soup=BeautifulSoup(html,features='lxml')
+	print(soup.h1) #找到h1标签的内容
+	print('\n',soup.p) #找到p标签的内容
+	
+	alla=soup.find_all('a') #先找到<a>标签里面的内容
+	alla=[l['href'] for l in alla] #遍历alla中内容，找到带href的
+	print(alla)
+解析CSS
+ex：from bs4 import BeautifulSoup
+	from urllib.request import urlopen
+	html=urlopen("http://www.baidu.com").read().decode('utf-8')
+	soup=BeautifulSoup(html,features='lxml')
+	aa=soup.find_all('li',{'class':'test'}) #类似于mongodb的查询条件
+	for i in aa:
+		print(i.get_text()) #get_text方法用于只获取标签里面的值
+		
+ex：from bs4 import BeautifulSoup
+	from urllib.request import urlopen
+	html=urlopen("http://www.baidu.com").read().decode('utf-8')
+	soup=BeautifulSoup(html,features='lxml')
+	aa=soup.find('ul',{'class':'test'})
+	aaa=aa.find_all('li')
+	for i in aaa:
+		print(i.get_text())
+搭配正则表达式
+ex：from bs4 import BeautifulSoup
+	from urllib.request import urlopen
+	import re
+	html=urlopen("https://morvanzhou.github.io/static/scraping/table.html").read().decode('utf-8')
+	soup=BeautifulSoup(html,features='lxml')
+	imglink=soup.find_all("img",{"src":re.compile('.*?\.jpg')})
+	for link in imglink:
+		print(link['src'])
+练习：爬百度百科
+#encode:utf-8
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+import re
+import random
+baseurl='https://baike.baidu.com'
+his=['/item/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB']
+for i in range(20):
+    url = baseurl + his[-1]
+    html = urlopen(url).read().decode('utf-8')
+    soup = BeautifulSoup(html, features='lxml')
+    print(soup.find('h1').get_text(),'             url:',his[-1]) #找到以第一个h1标签的东西，并输入网址
+    suburl = soup.find_all("a", {"target": "_blank", "href": re.compile("/item/(%.{2})+$")}) #找到所有百度百科内部的连接
+    if len(suburl) != 0:
+        his.append(random.sample(suburl, 1)[0]['href'])
+    else:
+        his.pop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

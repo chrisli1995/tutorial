@@ -27,5 +27,44 @@ INCLUDE_DIRS := $(PYTHON_INCLUDE) ${SERIAL_HDF5_INCLUDE} /usr/local/include /usr
 LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
 
 编译caffe make all -j4
+---------------------------------------------------------------------------------------------------------------------------------------------
+//定义别名：alias anaconda="/home/lwd/anaconda3/bin/python3.6"
 
-定义别名：alias anaconda="/home/lwd/anaconda3/bin/python3.6"
+下载编译完成后可以用已有的数据集去做一个测试
+首先下载训练集
+./data/mnist/get_mnist.sh （这个mnist.sh数据集是用于识别手写数字的）
+再对数据集做一个caffe可以识别的格式的处理，比如lmdb leveldb
+./examples/mnist/create_mnist.sh 
+
+然后就是训练数据集
+./build/tools/caffe train --solver=examples/mnist/lenet_solver.prototxt
+可以去examples/mnist/目录下查看由lennet卷积神经网络训练出来的模型
+
+最后测试数据集
+./build/tools/caffe test -model examples/mnist/lenet_train_test.prototxt -weights examples/mnist/lenet_iter_10000.caffemodel -iterations 100
+---------------------------------------------------------------------------------------------------------------------------------------------
+按照官方教程安装好devcloud
+运行devcloud：ssh colfax
+上传文件到devcloud：scp -r DevCloudDemo colfax:/home/u11037/DevCloudDemo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

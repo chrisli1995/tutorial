@@ -1,0 +1,204 @@
+sklearn
+先要导入的包：numpy scipy scikit-learn
+ex:通过datasets库中已有的数据来做一个简单的分类
+import numpy as np
+from sklearn import datasets
+from sklearn.cross_validation import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+iris=datasets.load_iris()
+iris_x=iris.data
+iris_y=iris.target
+
+# print(iris_x[:2,:])
+print("所有数据集为",iris_y)
+
+x_train,x_test,y_train,y_test=train_test_split(iris_x,iris_y,test_size=0.3)
+print("训练集为",y_train)
+
+knn=KNeighborsClassifier()
+knn.fit(x_train,y_train)
+print("通过K临近算法等到的预测结果",knn.predict(x_test))
+print("跟实际结果对比",y_test)
+---------------------------------------------------------------------------------------------------------------------------
+datasets数据库：有很多现有的数据集以及模型，非常的强大
+ex：采用的dataset中已有的数据
+from sklearn import datasets
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# load_data=datasets.load_boston()
+# data_x=load_data.data
+# data_y=load_data.target
+#
+# model=LinearRegression()
+# model.fit(data_x,data_y)
+#
+# print("预测值：",model.predict(data_x[:4,:]))
+# print("实际结果：",data_y[:4])
+
+x,y=datasets.make_regression(n_samples=100,n_features=1,n_targets=1,noise=1)
+plt.scatter(x,y)
+plt.show()
+----------------------------------------------------------------------------------------------------------------------------
+model有一些常见的参数和属性
+ex：这里输出的是斜率和与y轴的交点
+from sklearn import datasets
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+load_data=datasets.load_boston()
+data_x=load_data.data
+data_y=load_data.target
+
+model=LinearRegression()
+model.fit(data_x,data_y)
+
+# print("预测值：",model.predict(data_x[:4,:]))
+# print("实际结果：",data_y[:4])
+
+print(model.coef_)#y=0.1x+0.3，这里输出的0.1，即斜率
+print(model.intercept_)#y=0.1x+0.3，这里输出的0.3，即与y轴的交点
+----------------------------------------------------------------------------------------------------------------------------
+normalization 标准化数据
+ex：让数据更适用于模型的构建
+# 标准化数据模块
+from sklearn import preprocessing
+import numpy as np
+
+# 将资料分割成train与test的模块
+from sklearn.model_selection import train_test_split
+
+# 生成适合做classification资料的模块
+from sklearn.datasets.samples_generator import make_classification
+
+# Support Vector Machine中的Support Vector Classifier
+from sklearn.svm import SVC
+
+# 可视化数据的模块
+import matplotlib.pyplot as plt
+
+
+# a=np.array([[10,2.7,3.6],
+#            [-100,5,-2],
+#            [120,20,40]],dtype=np.float64)
+# print(a)
+# print(preprocessing.scale(a))
+
+x,y=make_classification(n_samples=300,n_features=2,n_redundant=0,n_informative=2,random_state=22,n_clusters_per_class=1,scale=100)
+# plt.scatter(x[:,0],x[:,1],c=y)
+# plt.show()
+x=preprocessing.scale(x) #标准化对模型的精确度的很重要
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=.3)
+clf=SVC()
+clf.fit(x_train,y_train)
+print(clf.score(x_test,y_test))
+----------------------------------------------------------------------------------------------------------------------------
+交叉验证 
+ex：为评判精度提供了便利
+from sklearn.datasets import load_iris # iris数据集
+from sklearn.model_selection import train_test_split # 分割数据模块
+from sklearn.neighbors import KNeighborsClassifier # K最近邻(kNN，k-NearestNeighbor)分类算法
+from sklearn.cross_validation import cross_val_score
+
+#加载iris数据集
+iris = load_iris()
+x = iris.data
+y = iris.target
+
+# knn=KNeighborsClassifier(n_neighbors=5)
+# scores=cross_val_score(knn,x,y,cv=5,scoring='accuracy')
+# print(scores.mean())
+
+import matplotlib.pyplot as plt #可视化模块
+
+#建立测试参数集
+k_range = range(1, 31)
+
+k_scores = []
+
+#藉由迭代的方式来计算不同参数对模型的影响，并返回交叉验证后的平均准确率
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    loss=-cross_val_score(knn,x,y,cv=10,scoring='mean_squared_error') #回归的用这个评判精度更好
+    scores = cross_val_score(knn, x, y, cv=10, scoring='accuracy') #分类模型用这个更好
+    k_scores.append(loss.mean())
+
+#可视化数据
+plt.plot(k_range, k_scores)
+plt.xlabel('Value of K for KNN')
+plt.ylabel('Cross-Validated Accuracy')
+plt.show()
+----------------------------------------------------------------------------------------------------------------------------
+过拟合
+ex：一个检验过拟合的列子
+from sklearn.learning_curve import learning_curve #学习曲线模块
+from sklearn.datasets import load_digits #digits数据集
+from sklearn.svm import SVC #支持向量机
+import matplotlib.pyplot as plt #可视化模块
+import numpy as np
+
+digits=load_digits()
+x=digits.data
+y=digits.target
+train_size,train_loss,test_loss=learning_curve(SVC(gamma=0.01),x,y,cv=10,scoring='mean_squared_error',train_sizes=[0.1,0.25,0.5,0.75,1])
+train_loss_mean=-np.mean(train_loss,axis=1)
+test_loss_mean=-np.mean(test_loss,axis=1)
+
+plt.plot(train_size,train_loss_mean,'o-',color="r",label="training")
+plt.plot(train_size,test_loss_mean,'o-',color="g",label="cross-validation")
+
+plt.xlabel("training examples")
+plt.ylabel("loss")
+plt.legend(loc="best")
+plt.show()
+----------------------------------------------------------------------------------------------------------------------------
+将模型保存
+ex：将训练的模型保存，并读取，下面有两种方法
+from sklearn import svm
+from sklearn import datasets
+
+clf=svm.SVC()
+iris=datasets.load_iris()
+x,y=iris.data,iris.target
+clf.fit(x,y)
+
+#方法一：pickle
+import pickle
+# with open('D:/Python网络爬虫/scikit-learn/save/clf.pickle','wb') as f:
+#     pickle.dump(clf,f)
+# with open('D:/Python网络爬虫/scikit-learn/save/clf.pickle','rb') as f:
+#     clf2=pickle.load(f)
+#     print(clf2.predict(x[0:1]))
+
+#方法二：joblib
+from sklearn.externals import joblib
+joblib.dump(clf,'D:/Python网络爬虫/scikit-learn/save/clf.pkl')
+clf3=joblib.load('D:/Python网络爬虫/scikit-learn/save/clf.pkl')
+print(clf3.predict(x[0:1]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

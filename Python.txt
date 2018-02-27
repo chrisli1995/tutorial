@@ -1,4 +1,4 @@
-/usr/local/bin/charm
+基本语法：
 定义变量是直接定义的
 ex：a = 10
 
@@ -39,6 +39,122 @@ ex:class Hello:
 				Hello._init_(self,name)
 			def sayHi(self):
 				print(Hi {0}.format(self._name))
+--------------------------------------------------------------------------------------------------------------------------------------				
+正则表达式：
+import re（导包）
+ptn=r"r[au]n"（匹配在[]中所有出现的东西）
+print(re.search(ptn,st))
+扩展：ptn=r"r[a-u]n"（匹配a到u的所有情况）
+	  ptn=r"r[0-9]n"
+	  ptn=r"r[0-9a-u]n"
+数字	  
+print(re.search(r"r\dn","run r4n"))(\d表示匹配所有数字)
+print(re.search(r"r\Dn","run r4n"))(\d表示匹配所有不是数字)
+空白符
+print(re.search(r"r\sn","r\nn r4n"))（\s匹配所有空白符，比如\n为换行、\t为tab）
+print(re.search(r"r\Sn","r\nn r4n"))（\s匹配所有不是空白符，比如\n为换行、\t为tab）
+所有数字字母和"_"
+print(re.search(r"r\wn","r\nn r4n"))（\w匹配所有的数字字母和"_"）
+print(re.search(r"r\Wn","r\nn r4n"))（\W匹配所有不是数字字母和"_"）
+空格
+print(re.search(r"\brun\b","cat run dog")（\b匹配空格）
+print(re.search("\Brun\B","cat  run  dog"))
+特殊字符和任意字符
+print(re.search(r"run\\","run\ to me"))
+print(re.search(r"r.n","cat  run  dog"))
+句尾句首
+print(re.search(r"^dog","dog run cat"))（必须在句首）
+print(re.search(r"cat$","dog run cat"))（必须在句尾）
+是否
+print(re.search(r"Mon(day)?","Monday"))
+print(re.search(r"Mon(day)?","Mon"))（以上两种字符串均可以匹配到）
+多行匹配
+print(re.search(r"^I","多行",flags=re.M))
+0或多次
+print(re.search(r"ab*","a abbbb"))
+1或多次
+print(re.search(r"ab+","a abbbb"))
+可选次数
+print(re.search(r"ab{2,10}","a abbbb"))（匹配可选次数）
+group组
+match=re.search(r"(\d+), Data:(.+)","ID:205541, Data:Feb/12/2017")
+print(match.group())
+print(match.group(1))
+print(match.group(2))
+结果是：205541, Data:Feb/12/2017
+		205541
+		Feb/12/2017
+match=re.search(r"(?P<id>\d+), Data:(?P<date>.+)","ID:205541, Data:Feb/12/2017")
+print(match.group("id"))
+print(match.group("date"))
+结果是：205541
+		Feb/12/2017
+寻找所有匹配
+print(re.findall(r"r[ua]n","run ran ren"))
+print(re.findall(r"(run|ran)","run ran ren"))
+替换
+print(re.sub(r"r[au]ns","catches","dog runs to cat"))
+分裂
+print(re.spilt(r"[,;\.]","a;b;c;d;e"))
+compiled_re=re.compile(r"r[ua]n")
+print(compiled_re.search("dog ran to cat"))
+--------------------------------------------------------------------------------------------------------------------------------------
+循环：
+for循环
+ex:list[1,3,54,643,121]
+   for i in list:
+		print(i)
+ex:for i in range(1,10):
+		print(i)
+关于range
+range(开始，终止，步长)
+--------------------------------------------------------------------------------------------------------------------------------------
+numpy&pandas
+前者是用于矩阵运算 后者是用于图形化表示关系
+两者的安装都可以直接通过pip来完成
+numpy:
+1、numpy的一些基本属性以及矩阵的生成过程
+import numpy as np
+
+array=np.array([[1,2,3],
+                [2,3,4]])
+print(array)
+print('维数:',array.ndim)
+print('形状:',array.shape)
+print('总共有多少元素:',array.size)
+
+#创建array的方法
+#定义元素的类型
+array=np.array([1,2,3,],dtype=np.float)
+print(array.dtype)
+#定义矩阵
+array1=np.array([[1,2,3],
+                 [3,4,5]])
+print(array1)
+#生成全部为零的矩阵
+array2=np.zeros((3,4))#全部为1的矩阵就是np.ones
+print(array2)
+#生成一定范围的数列
+array3=np.arange(10,20,2)
+print(array3)
+array4=np.arange(12).reshape((3,4))
+print(array4)
+#生成一定段数的数列或者数组
+array5=np.linspace(1,10,6).reshape((3,2))
+print(array5)
+
+
+
+
+
+
+
+
+
+
+
+
+
 			
 			
 			
