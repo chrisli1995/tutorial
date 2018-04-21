@@ -177,6 +177,8 @@ joblib.dump(clf,'D:/Python网络爬虫/scikit-learn/save/clf.pkl')
 clf3=joblib.load('D:/Python网络爬虫/scikit-learn/save/clf.pkl')
 print(clf3.predict(x[0:1]))
 
+git@github.com:chrisli1995/wikiextractor.git
+
 
 
 

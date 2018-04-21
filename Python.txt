@@ -14,6 +14,7 @@ ex:score= 90
 循环语句for i in range(0,100):
 		print(i)
 		//python不像Java那样支持字符串拼接 他的方式是print("item {0}".format(i))、print("item {0},{1}".format(i,"hello python"))
+		//直接用,号也可以 print('xxxd','xssd')
 		
 定义函数
 ex: def sayhello():
