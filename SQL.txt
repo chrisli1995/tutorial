@@ -1,6 +1,7 @@
 PROMPT \u@\h \d>
 mysql.user
 创建数据库：CREATE DATABASE 数据库名 DEFAULT CHARACTER SET 字符集 COLLATE 排序规则
+CREATE DATABASE IF NOT EXISTS yourdbname DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 查看数据库格式：SHOW CREATE DATABASE 数据库名
 修改编码方式：ALTER DATABASE 数据库名 CHARACTER SET = 编码方式
 删除数据库：DROP DATABASE 数据库名
