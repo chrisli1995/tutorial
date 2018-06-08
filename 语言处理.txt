@@ -4,12 +4,14 @@ https://dumps.wikimedia.org/zhwiki/
 运用wikiextractor对数据集进行读取：
 python WikiExtractor.py -b 1024M（单个文件的大小） -o 文件名 zhwiki-latest-pages-articles.xml.bz2
 
-去掉数据集中的一些特殊符号：
-python脚本 存放在数据集里 也有命令行运行 后面要跟做过处理的文件名
+去掉数据集中的一些特殊符号(delete.py)：
+python脚本 存放在数据集里 也用命令行运行 后面要跟做过处理的文件名
+
 
 中英文转换：
-使用opencc工具
+使用opencc工具：
+opencc -i wiki_00 -o zh_wiki_00 -c t2s.json
 
-使用python库jieba进行对数据集的分词处理
+使用python库jieba进行对数据集的分词处理（需要时间比较久）
 
 
