@@ -1,5 +1,6 @@
 PROMPT \u@\h \d>
 mysql.user
+set @@global.sql_mode=(select replace(@@global.sql_mode,'ONLY_FULL_GROUP_BY',''));
 创建数据库：CREATE DATABASE 数据库名 DEFAULT CHARACTER SET 字符集 COLLATE 排序规则
 CREATE DATABASE IF NOT EXISTS yourdbname DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 查看数据库格式：SHOW CREATE DATABASE 数据库名
@@ -268,8 +269,30 @@ columns_priv表指定列级权限。这里指定的权限适用于一个表的特定列。
 
 ex:grant select on *.* to test_user1@'%' identified by "123" with grant option;
 
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, TRIGGER ON agle.* TO 'agle_backend'@'%' IDENTIFIED BY '506_Backend';
+如果提示密码没有达到隐私等级可以输入：
+set global validate_password_policy=0; 
+--设置隐私等级--
+set global validate_password_length=4;  
+--设置最低密码长度--
 
-	
+
+---------------------------------------------------------------------------------------------------------------------------
+MySQL5.7新增了json格式的填写
+创建表的时候直接给字段名赋予json格式就可以了，比如：
+create table data_collect(id int primary key,name varchar(20),lastlogininfo json);
+
+插入的时候可以由两种格式进行插入
+INSERT INTO user VALUES(1 ,"lucy",'{"time":"2015-01-01 13:00:00","ip":"192.168.1.1","result":"fail"}');
+INSERT INTO data_collect VALUES(2,'chris',json_object("time",NOW(),"ip","192.168.1.1","result","fail"))
+
+在查询的时候，也有两种方式，两种方式都是通过$.key的方式去json里面找东西
+SELECT *
+FROM data_collect
+-- WHERE lastlogininfo->'$.result'="success" --
+WHERE json_extract(lastlogininfo,'$.result')='success'
+
+
 
 
 
