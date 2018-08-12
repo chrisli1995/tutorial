@@ -150,8 +150,8 @@ print(array5)
 
 
 
-
-
+python run.py --mode TRAIN --model_dir ../model/model_small --train_path ../data/small/train --dev_path ../data/small/valid --batch_size 4 --vocab_size 100 --size 20 --num_layers 2 --n_epoch 100 --L 15 --n_bucket 3 --saveCheckpoint True
+538
 
 
 

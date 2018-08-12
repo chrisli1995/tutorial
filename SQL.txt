@@ -293,6 +293,8 @@ FROM data_collect
 -- WHERE lastlogininfo->'$.result'="success" --
 WHERE json_extract(lastlogininfo,'$.result')='success'
 
+
+INSERT INTO t_measure_json_test(measure_item_data,note) VALUES('{"time":"2015-01-01 13:00:00","ip":"192.168.1.1","result":"fail"}','');
 ---------------------------------------------------------------------------------------------------------------------------
 
 
