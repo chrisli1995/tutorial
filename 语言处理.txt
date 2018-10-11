@@ -14,4 +14,7 @@ opencc -i wiki_00 -o zh_wiki_00 -c t2s.json
 
 使用python库jieba进行对数据集的分词处理（需要时间比较久）
 
+学习NLP，我建议第一步学language model， 然后依次学POS tagging， 语法分析PCFG，接着接触NLP的第一个实际应用，学习机器翻译（机器翻译真是融合了各种NLP知识到里面），先从基于统计的机器翻译开始学，IBM model1， IBM model 2，再到phrase based machine translation，然后再学log linear model。 再往后就可以学习各种应用啦，情感分析，文本分类等，这个可以上斯坦福的那门NLP课程，也是非常棒的课程。
+
+
 
