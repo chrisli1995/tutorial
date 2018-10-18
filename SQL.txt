@@ -277,6 +277,8 @@ set global validate_password_policy=0;
 set global validate_password_length=4;  
 --设置最低密码长度--
 
+设置用户登入密码
+update user set authentication_string = password('hardwork'), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
 
 ---------------------------------------------------------------------------------------------------------------------------
 MySQL5.7新增了json格式的填写
@@ -296,8 +298,12 @@ WHERE json_extract(lastlogininfo,'$.result')='success'
 
 INSERT INTO t_measure_json_test(measure_item_data,note) VALUES('{"time":"2015-01-01 13:00:00","ip":"192.168.1.1","result":"fail"}','');
 ---------------------------------------------------------------------------------------------------------------------------
+MySQL使用情况查看
+查看一个数据库所有表的使用情况
+SELECT TABLE_NAME,CONCAT(ROUND((DATA_LENGTH+INDEX_LENGTH)/1024/1024,2),'MB') AS data,TABLE_ROWS
+FROM `TABLES`
+WHERE TABLE_SCHEMA='qlt'
 
-update user set authentication_string = password('hardwork'), password_expired = ‘N’, password_last_changed = now() where user = ‘root’;
 
 
 
