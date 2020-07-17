@@ -6,7 +6,7 @@
 
 - <a href="###[C]ACL(Association for Computational Linguistics)">1.1 [C]ACL(Association for Computational Linguistics)</a>
 - <a href="###[J]ACM Transactions on Intelligent Systems and Technology">1.2 [J]ACM Transactions on Intelligent Systems and Technology</a>
-- <a href="###[J]软件学报">1.3 [J]软件学报</a>
+- [1.3 [J]软件学报](#[J]软件学报)
 
 <a href="##2019">2.2019</a>
 
@@ -40,7 +40,7 @@ SCI工程技术2区，三年平均IF：3.010
 
 针对文本领域的对抗样本综述文章。主要内容为：第三章，介绍了攻击图像数据与攻击文本数据的区别，简要说明攻击图像相关的神经网络的历程，为NLP领域提供参考。第四章，介绍目前主流的攻击文本深度神经网络的方法。第五章，探讨了防御的方法（这里在没有接触这个领域的时候，有疑惑，并不知道对抗样本实际的应用场景）。第六章，提出目前领域内还未解决的问题。
 
-### [J]软件学报
+### <span id="[J]软件学报">[J]软件学报</span>
 
 期刊概述：三大学报
 
