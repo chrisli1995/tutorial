@@ -4,7 +4,7 @@
 
 [1.2020](#2020)
 
-- [1.1 [J][C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
+- [1.1 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
 - [1.2 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
 - [1.3 [J]软件学报](#[J]软件学报)
 
