@@ -5,8 +5,9 @@
 [1.2020](#2020)
 
 - [1.1 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
-- [1.2 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
-- [1.3 [J]软件学报](#[J]软件学报)
+- [1.2 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#[C]AAAI(National Conference of the American Association for Artificial Intelligence))
+- [1.3 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
+- [1.4 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
@@ -25,6 +26,22 @@
 ### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
 
 #### Attention Guided Graph Convolutional Networks for Relation Extraction
+
+### <span id="[C]AAAI(National Conference of the American Association for Artificial Intelligence)">[C]AAAI(National Conference of the American Association for Artificial Intelligence)</span>
+
+会议概述：AI领域顶会
+
+#### Is BERT Really Robust? A Strong Baseline for Natural Language Attack on Text Classification and Entailment
+
+机构：麻省理工学院计算机科学与人工智能实验室（CSAIL）、香港大学、新加坡科技研究局
+
+​     本论文研究了在黑盒情况下针对最新文本分类和文本蕴含模型的对抗攻击。主要针对目前文本对抗样本所存在的三个普遍问题：1.人对对抗样本的预测应该保持一致；2.对抗样本需要包含于原始样本一样的语义（以人的视角）；3. 对抗样本需要看起来自然，且符合语法。
+
+​     实验结果表明，提出的系统TEXTFOOLER在生成有针对性的对抗文本方面是有效的。人为评估表明，所生成的对抗性文本清晰易读，符合语法规定，并且含义与原始文本相似。
+
+​     主要针对任务：文本分类以及文本蕴含任务。
+
+​     使用的数据集和评价指标值得学习。
 
 ### <span id="[J]ACM Transactions on Intelligent Systems and Technology">[J]ACM Transactions on Intelligent Systems and Technology</span>
 
