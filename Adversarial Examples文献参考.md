@@ -25,7 +25,21 @@
 
 ### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
 
-#### Attention Guided Graph Convolutional Networks for Relation Extraction
+### Its Morphin Time!Combating Linguistic Discrimination with Inflectional Perturbations
+
+机构：新加坡国立大学、南洋理工大学
+
+论文提出了一个新颖的概念，即在NLP领域的模型应该考虑到不是以英语为母语，但在使用英语的人，他们往往存在一些方言，或者使用一些错误的时态，模型理应对这些情况有“包容性”。具体做法是找到原始语句的中的名词、动词和形容词，在保留词根的情况下，对这些句子中的单词进行替换，找到最佳的替换组合。
+
+实验部分主要与两个任务，自动问答以及机器翻译，主要采用的评估方式为F1值和BLEU，比价评价指标前后的变化。
+
+### Word-level Textual Adversarial Attacking as Combinatorial Optimization
+
+机构：清华大学计算机科学与技术系智能技术与系统国家重点实验室、哥伦比亚大学、[华为诺亚方舟实验室](https://www.baidu.com/link?url=s5Lt6TJHBpNt2634tZ5-bkmOQyQXPvk64RoQSTIEPEUS4ZBpIuOfI0XSrkihMWF1&wd=&eqid=b7b2fc8a000b41da000000055f240b37)
+
+导师：刘知远
+
+主要是针对两个问题（目前看的2020年的词级文本对抗样本的文章均针对的这个两个问题，比较重要：1.减少替换词的搜索空间。2.对抗实例的搜索。两个问题目前均没有一个较好的解决思路，论文提出引入义素的概念（sememes）来保留更多更高质量替换候选词，采用一种基于粒子群优化算法的搜索策略找到对抗样本。
 
 ### <span id="[C]AAAI(National Conference of the American Association for Artificial Intelligence)">[C]AAAI(National Conference of the American Association for Artificial Intelligence)</span>
 
