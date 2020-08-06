@@ -4,14 +4,16 @@
 
 [1.2020](#2020)
 
-- [1.1 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
-- [1.2 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#[C]AAAI(National Conference of the American Association for Artificial Intelligence))
+- [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#[C]AAAI(National Conference of the American Association for Artificial Intelligence))
+- [1.2 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
 - [1.3 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
-- [1.4 [J]软件学报](#[J]软件学报)
+- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#[J]TACL(Transactions of the Association for Computational Linguistics))
+- [1.5 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
-- [2.1 [C]NDSS(Network and Distributed System Security Symposium)](#[C]NDSS(Network and Distributed System Security Symposium))
+- [2.1 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP(Empirical Methods in Natural Language Processing))
+- [2.1 [C]NDSS(Network and Distributed System Security Symposium)](#2.1 [C]NDSS(Network and Distributed System Security Symposium))
 
 ## 数据集
 
@@ -22,24 +24,6 @@
 
 
 ## <span id="2020">2020</span>
-
-### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
-
-### Its Morphin Time!Combating Linguistic Discrimination with Inflectional Perturbations
-
-机构：新加坡国立大学、南洋理工大学
-
-论文提出了一个新颖的概念，即在NLP领域的模型应该考虑到不是以英语为母语，但在使用英语的人，他们往往存在一些方言，或者使用一些错误的时态，模型理应对这些情况有“包容性”。具体做法是找到原始语句的中的名词、动词和形容词，在保留词根的情况下，对这些句子中的单词进行替换，找到最佳的替换组合。
-
-实验部分主要与两个任务，自动问答以及机器翻译，主要采用的评估方式为F1值和BLEU，比价评价指标前后的变化。
-
-### Word-level Textual Adversarial Attacking as Combinatorial Optimization
-
-机构：清华大学计算机科学与技术系智能技术与系统国家重点实验室、哥伦比亚大学、[华为诺亚方舟实验室](https://www.baidu.com/link?url=s5Lt6TJHBpNt2634tZ5-bkmOQyQXPvk64RoQSTIEPEUS4ZBpIuOfI0XSrkihMWF1&wd=&eqid=b7b2fc8a000b41da000000055f240b37)
-
-导师：刘知远
-
-主要是针对两个问题（目前看的2020年的词级文本对抗样本的文章均针对的这个两个问题，比较重要：1.减少替换词的搜索空间。2.对抗实例的搜索。两个问题目前均没有一个较好的解决思路，论文提出引入义素的概念（sememes）来保留更多更高质量替换候选词，采用一种基于粒子群优化算法的搜索策略找到对抗样本。
 
 ### <span id="[C]AAAI(National Conference of the American Association for Artificial Intelligence)">[C]AAAI(National Conference of the American Association for Artificial Intelligence)</span>
 
@@ -57,6 +41,24 @@
 
 ​     使用的数据集和评价指标值得学习。
 
+### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
+
+#### Its Morphin Time!Combating Linguistic Discrimination with Inflectional Perturbations
+
+机构：新加坡国立大学、南洋理工大学
+
+论文提出了一个新颖的概念，即在NLP领域的模型应该考虑到不是以英语为母语，但在使用英语的人，他们往往存在一些方言，或者使用一些错误的时态，模型理应对这些情况有“包容性”。具体做法是找到原始语句的中的名词、动词和形容词，在保留词根的情况下，对这些句子中的单词进行替换，找到最佳的替换组合。
+
+实验部分主要与两个任务，自动问答以及机器翻译，主要采用的评估方式为F1值和BLEU，比价评价指标前后的变化。
+
+#### Word-level Textual Adversarial Attacking as Combinatorial Optimization
+
+机构：清华大学计算机科学与技术系智能技术与系统国家重点实验室、哥伦比亚大学、[华为诺亚方舟实验室](https://www.baidu.com/link?url=s5Lt6TJHBpNt2634tZ5-bkmOQyQXPvk64RoQSTIEPEUS4ZBpIuOfI0XSrkihMWF1&wd=&eqid=b7b2fc8a000b41da000000055f240b37)
+
+导师：刘知远
+
+主要是针对两个问题（目前看的2020年的词级文本对抗样本的文章均针对的这个两个问题，比较重要：1.减少替换词的搜索空间。2.对抗实例的搜索。两个问题目前均没有一个较好的解决思路，论文提出引入义素的概念（sememes）来保留更多更高质量替换候选词，采用一种基于粒子群优化算法的搜索策略找到对抗样本。
+
 ### <span id="[J]ACM Transactions on Intelligent Systems and Technology">[J]ACM Transactions on Intelligent Systems and Technology</span>
 
 期刊概述：ISSN：2157-6904
@@ -70,6 +72,18 @@ SCI工程技术2区，三年平均IF：3.010
 导师：盛权政（Michael Sheng）
 
 针对文本领域的对抗样本综述文章。主要内容为：第三章，介绍了攻击图像数据与攻击文本数据的区别，简要说明攻击图像相关的神经网络的历程，为NLP领域提供参考。第四章，介绍目前主流的攻击文本深度神经网络的方法。第五章，探讨了防御的方法（这里在没有接触这个领域的时候，有疑惑，并不知道对抗样本实际的应用场景）。第六章，提出目前领域内还未解决的问题。
+
+### <span id="[J]TACL(Transactions of the Association for Computational Linguistics)">[J]TACL(Transactions of the Association for Computational Linguistics)</span>
+
+期刊概述：ACL旗下的期刊，NLP领域内的顶刊了，但是不知道CCF和中科院查不到。
+
+#### Trick Me If You Can Human-in-the-Loop Generation of Adversarial Examples for Question Answering
+
+对抗评估（adversarial evaluation）强调测试模型对自然语言的理解能力。由于过去的方法只能发现表层的规律，获得的对抗样本只有有限的复杂性和多样性。本文中，研究人员提出了一种人类参与的对抗样本生成循环流程。在流程中，人类作者可以被引导用于中断模型。研究人员给作者们提供了交互式界面，用于解释模型的预测结果。
+
+研究人员在 Quizbowl 这一机器问答任务（猜词任务，随着给的问题越来越多，猜词难度也会越来越小）上使用提出的生成框架，由热衷于 trivia 游戏的人制作对抗问题。而最终生成的文本通过人机匹配进行验证：尽管生成的问题对人类很普通，但可能会全面地难倒神经模型或信息抽取模型。这些对抗样本涵盖了多种多样的特征，从多跳推理（multi-hop reasoning）到实体类型干扰项，暴露出了鲁棒的机器问答研究中的许多开放挑战。（本质上就是提出了一个人工对抗性数据集，人工的过程可以理解）
+
+生成对抗样本的交互界面和数据展示。人类作者首先在右上写下一个问题。而模型则会在左侧提供预测结果，并解释这样推断的原因（会高亮得出判断是因为哪些词）。而人类作者可以选择接受这个问题，用于迷惑模型。
 
 ### <span id="[J]软件学报">[J]软件学报</span>
 
@@ -88,6 +102,24 @@ SCI工程技术2区，三年平均IF：3.010
 
 
 ## <span id="2019">2019</span>
+
+### <span id="[C]EMNLP(Empirical Methods in Natural Language Processing)">[C]EMNLP(Empirical Methods in Natural Language Processing)</span>
+
+#### Universal Adversarial Triggers for Attacking and Analyzing NLP
+
+机构：马里兰大学，加里福利亚大学
+
+以前，NLP中的对抗攻击一般都是针对特定输入的，那么他们对任意的输入是否有效呢？
+
+本文针对这个问题，搜索通用的对抗性触发器：与输入无关的token序列，当连接到来自数据集的任何输入时，这些token序列触发模型生成特定的预测。例如，触发器导致SNLI隐含精度从89.94%下降到 0.55%，72%的“为什么”问题在SQuAD中回答“杀死美国人”，而gps -2语言模型即使在非种族背景下也会输出种族主义。（这就很厉害了。）
+
+主要攻击了三个任务：
+
+1.文本分类任务，主要对三个模型进行了攻击：BI-LSTM、Word2Vec、ELMO
+
+2.阅读理解任务，主要攻击模型BiDAF（baseline）
+
+3.条件文本生成，主要攻击模型GPT-2
 
 ### <span id="[C]NDSS(Network and Distributed System Security Symposium)">[C]NDSS(Network and Distributed System Security Symposium)</span>
 
