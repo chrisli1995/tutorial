@@ -43,6 +43,16 @@
 
 ### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
 
+#### Evaluating and Enhancing the Robustness of Neural Network-based Dependency Parsing Models with Adversarial Examples
+
+机构：复旦大学上海市智能信息处理重点实验室、加州大学洛杉矶分校
+
+导师：郑骁庆
+
+对抗样本问题的存在使得深度学习模型在应用落地上存在大量的潜在风险，对抗样本已经在计算机视觉领域取得了不少研究成果，包括多种攻击与防御方法，最终目的是为了提高深度学习模型的鲁棒性。在自然语言处理领域，与对抗样本相关的研究较少，本次分享从文本对抗样本问题出发，分析主要做法、存在问题，并将其拓展到依存句法领域。
+
+主要的贡献点是把对抗样本扩展到依存句法领域，由于对这一块了解的不多，所以并没有细看。替换词的生成采用BERT，具体如何生成并没有给出。
+
 #### Its Morphin Time!Combating Linguistic Discrimination with Inflectional Perturbations
 
 机构：新加坡国立大学、南洋理工大学
@@ -50,6 +60,14 @@
 论文提出了一个新颖的概念，即在NLP领域的模型应该考虑到不是以英语为母语，但在使用英语的人，他们往往存在一些方言，或者使用一些错误的时态，模型理应对这些情况有“包容性”。具体做法是找到原始语句的中的名词、动词和形容词，在保留词根的情况下，对这些句子中的单词进行替换，找到最佳的替换组合。
 
 实验部分主要与两个任务，自动问答以及机器翻译，主要采用的评估方式为F1值和BLEU，比价评价指标前后的变化。
+
+#### On the Robustness of Language Encoders against Grammatical Errors
+
+机构：北京大学、上海交通大学、加州大学洛杉矶分校
+
+文章对目前比较流行的几个预训练模型进行了攻击（ELMO、BERT 、RoBERTa），攻击的手段主要以语法出发（这里的语法实际上也是对特定的token，或者token组合进行替换，例如growing替换成grows），之前针对语法的攻击要不是针对指定的语料库，要不是严重依赖于人类注释和专家知识，文章提出了一种自动生成对抗样本的方法，且样本满足各类语法错误。
+
+在此基础上分析了语法错误的识别在预训练模型的不同层上的识别能力，通过BERT来挖掘出存在语法错误的token。
 
 #### Word-level Textual Adversarial Attacking as Combinatorial Optimization
 
