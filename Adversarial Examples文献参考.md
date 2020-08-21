@@ -8,7 +8,8 @@
 - [1.2 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
 - [1.3 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
 - [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#[J]TACL(Transactions of the Association for Computational Linguistics))
-- [1.5 [J]软件学报](#[J]软件学报)
+- [1.5 [J]JMLR(Journal of Machine Learning Research)](#[J]JMLR(Journal of Machine Learning Research))
+- [1.6 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
@@ -40,6 +41,14 @@
 ​     主要针对任务：文本分类以及文本蕴含任务。
 
 ​     使用的数据集和评价指标值得学习。
+
+### Seq2Sick: Evaluating the Robustness of Sequence to Sequence Models with Adversarial Examples
+
+机构：加州大学洛杉矶分校
+
+论文虽然是2020年发表在AAAI会议上的，但是在2018年就在arxiv上发表了（会议也能拖这么久）。所以在一开始看的时候并没有感觉到太多的创新点。按照文章的说法，本文是第一个攻击seq2seq模型的文章（之前其实看过很多文章攻击的都是类似的结构），针对性的提出两种攻击方式：第一种是无重叠攻击，即对抗样本和原始输出不会有重复的地方；第二种是关键字攻击，即对抗样本需要保留给定的关键字。显然，关键字攻击的难度更大。
+
+文章证明了稍微修改seq2seq模型的输入能够达到显著修改输出，seq2seq模型比传统的CNN模型更加健壮，想要产生对抗样本会造成更大的失真，且更易被感知。
 
 ### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
 
@@ -102,6 +111,20 @@ SCI工程技术2区，三年平均IF：3.010
 研究人员在 Quizbowl 这一机器问答任务（猜词任务，随着给的问题越来越多，猜词难度也会越来越小）上使用提出的生成框架，由热衷于 trivia 游戏的人制作对抗问题。而最终生成的文本通过人机匹配进行验证：尽管生成的问题对人类很普通，但可能会全面地难倒神经模型或信息抽取模型。这些对抗样本涵盖了多种多样的特征，从多跳推理（multi-hop reasoning）到实体类型干扰项，暴露出了鲁棒的机器问答研究中的许多开放挑战。（本质上就是提出了一个人工对抗性数据集，人工的过程可以理解）
 
 生成对抗样本的交互界面和数据展示。人类作者首先在右上写下一个问题。而模型则会在左侧提供预测结果，并解释这样推断的原因（会高亮得出判断是因为哪些词）。而人类作者可以选择接受这个问题，用于迷惑模型。
+
+### <span id="[J]JMLR(Journal of Machine Learning Research)">[J]JMLR(Journal of Machine Learning Research)</span>
+
+期刊概述：ISSN：1532-4435
+
+SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
+
+#### Greedy Attack and Gumbel Attack: Generating Adversarial Examples for Discrete Data
+
+机构：加州大学
+
+虽然是2020期刊，但是其实内容是在18年就发表的，所以现在来看它的创新性不是太足，主要步骤还是先找到特征对文本分类任务的影响最大的点，然后对它进行替换，替换的方式是采用GloVe生成的词向量找到欧式距离最近的词。
+
+分两种方式完成以上步骤，greedy attack就是采用贪心的方式来完成，效果比较好，但效率不高；gumbel attack，主要是采用梯度的方式，效率更高。
 
 ### <span id="[J]软件学报">[J]软件学报</span>
 
