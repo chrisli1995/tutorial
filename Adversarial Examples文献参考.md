@@ -13,8 +13,9 @@
 
 [2.2019](#2019)
 
-- [2.1 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP(Empirical Methods in Natural Language Processing))
-- [2.1 [C]NDSS(Network and Distributed System Security Symposium)](#2.1 [C]NDSS(Network and Distributed System Security Symposium))
+- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing))
+- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP(Empirical Methods in Natural Language Processing))
+- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#2.1 [C]NDSS(Network and Distributed System Security Symposium))
 
 ## 数据集
 
@@ -143,6 +144,16 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 
 ## <span id="2019">2019</span>
+
+### <span id="[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing))">[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)</span>
+
+会议概述：语音识别顶会
+
+### Universal Adversarial Attacks on Text Classifiers
+
+机构：伊朗沙力夫理工大学，伊朗清华
+
+文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
 
 ### <span id="[C]EMNLP(Empirical Methods in Natural Language Processing)">[C]EMNLP(Empirical Methods in Natural Language Processing)</span>
 
