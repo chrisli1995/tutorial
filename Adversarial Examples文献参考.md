@@ -79,6 +79,12 @@
 
 在此基础上分析了语法错误的识别在预训练模型的不同层上的识别能力，通过BERT来挖掘出存在语法错误的token。
 
+#### Robust Encodings: A Framework for Combating Adversarial Typos
+
+机构：斯坦福大学
+
+​     以防御为主的文本对抗样本文章，提出了一个名为RobEn的框架，用于可以抵御对抗扰动的系统。主要可以实现对拼写错误，同义词替换等攻击方式的抵御。主要通过聚类的方式，将错别字与原文定义在同一个空间当中。方式是尽量使得不同的错别字与可能的会受到干扰的词放在同一簇里面。
+
 #### Word-level Textual Adversarial Attacking as Combinatorial Optimization
 
 机构：清华大学计算机科学与技术系智能技术与系统国家重点实验室、哥伦比亚大学、[华为诺亚方舟实验室](https://www.baidu.com/link?url=s5Lt6TJHBpNt2634tZ5-bkmOQyQXPvk64RoQSTIEPEUS4ZBpIuOfI0XSrkihMWF1&wd=&eqid=b7b2fc8a000b41da000000055f240b37)
