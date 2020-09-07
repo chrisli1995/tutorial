@@ -43,7 +43,15 @@
 
 ​     使用的数据集和评价指标值得学习。
 
-### Seq2Sick: Evaluating the Robustness of Sequence to Sequence Models with Adversarial Examples
+#### Joint Character-level Word Embedding and Adversarial Stability Training to Defend Adversarial Text
+
+机构：中国科学院 
+
+​     本文主要针对字符集的对抗样本进行防御，首先提出来了目前字符级防御急需解决的两个问题：1.修改的词出现OOV问题（这也是为什么字符级的对抗样本能够产生扰动的主要原因）。2.对抗样本和原本的分布不同（说白了就是模型没有适应对抗样本）。针对第一个问题，本文采用了字符级的编码来最小的使得机器学习字符之间的联系，减小对抗样本带来的影响，因此也不存在OOV的问题了。针对第二个问题，主要还是采用自定义的损失去更新模型。
+
+​     实验部分对五个常用的文本分类数据集在字符级的LSTM以及CNN上面完成了实验（Char-LSTM、Char-CNN）。
+
+#### Seq2Sick: Evaluating the Robustness of Sequence to Sequence Models with Adversarial Examples
 
 机构：加州大学洛杉矶分校
 
