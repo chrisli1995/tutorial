@@ -31,6 +31,14 @@
 
 会议概述：AI领域顶会
 
+#### A Robust Adversarial Training Approach to Machine Reading Comprehension
+
+机构：百度、厦门大学、北京大学
+
+导师：李素建（北京大学）
+
+​     一种最简单的对抗样本防御策略就是将生成的对抗样本重新放入数据集进行学习，本文主要是在机器阅读理解领域提出一个新的训练方式来完成模型学习。具体步骤为：1.将模型视为一个黑盒，从原始数据中的备选的单词（实验部分又改为了自己建造的一个词表，为了模型更容易收敛，结果看得更好）中找到可以扰动结果的序列；2.从原文嵌入扰动序列，生成对抗样本；3.重复训练模型。主要的创新点集中在2，定义一个权重矩阵（需训练），来找到什么序列能够扰动结果，并且这是一个定向攻击（看到的比较少）。
+
 #### Is BERT Really Robust? A Strong Baseline for Natural Language Attack on Text Classification and Entailment
 
 机构：麻省理工学院计算机科学与人工智能实验室（CSAIL）、香港大学、新加坡科技研究局
