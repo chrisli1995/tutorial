@@ -4,18 +4,18 @@
 
 [1.2020](#2020)
 
-- [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#[C]AAAI(National Conference of the American Association for Artificial Intelligence))
-- [1.2 [C]ACL(Association for Computational Linguistics)](#[C]ACL(Association for Computational Linguistics))
-- [1.3 [J]ACM Transactions on Intelligent Systems and Technology](#[J]ACM Transactions on Intelligent Systems and Technology)
-- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#[J]TACL(Transactions of the Association for Computational Linguistics))
-- [1.5 [J]JMLR(Journal of Machine Learning Research)](#[J]JMLR(Journal of Machine Learning Research))
+- [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#CAAAI)
+- [1.2 [C]ACL(Association for Computational Linguistics)](#[C]ACL)
+- [1.3 [J]TITS(ACM Transactions on Intelligent Systems and Technology)](#[J]TITS)
+- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#[J]TACL)
+- [1.5 [J]JMLR(Journal of Machine Learning Research)](#[J]JMLR)
 - [1.6 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
-- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing))
-- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP(Empirical Methods in Natural Language Processing))
-- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#2.1 [C]NDSS(Network and Distributed System Security Symposium))
+- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#[C]ICASSP)
+- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP)
+- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#[C]NDSS)
 
 ## 数据集
 
@@ -27,7 +27,7 @@
 
 ## <span id="2020">2020</span>
 
-### <span id="[C]AAAI(National Conference of the American Association for Artificial Intelligence)">[C]AAAI(National Conference of the American Association for Artificial Intelligence)</span>
+### [C]AAAI
 
 会议概述：AI领域顶会
 
@@ -67,7 +67,7 @@
 
 文章证明了稍微修改seq2seq模型的输入能够达到显著修改输出，seq2seq模型比传统的CNN模型更加健壮，想要产生对抗样本会造成更大的失真，且更易被感知。
 
-### <span id="[C]ACL(Association for Computational Linguistics)">[C]ACL(Association for Computational Linguistics)</span>
+### [C]ACL
 
 #### Evaluating and Enhancing the Robustness of Neural Network-based Dependency Parsing Models with Adversarial Examples
 
@@ -109,7 +109,7 @@
 
 主要是针对两个问题（目前看的2020年的词级文本对抗样本的文章均针对的这个两个问题，比较重要：1.减少替换词的搜索空间。2.对抗实例的搜索。两个问题目前均没有一个较好的解决思路，论文提出引入义素的概念（sememes）来保留更多更高质量替换候选词，采用一种基于粒子群优化算法的搜索策略找到对抗样本。
 
-### <span id="[J]ACM Transactions on Intelligent Systems and Technology">[J]ACM Transactions on Intelligent Systems and Technology</span>
+### [J]TITS
 
 期刊概述：ISSN：2157-6904
 
@@ -123,7 +123,7 @@ SCI工程技术2区，三年平均IF：3.010
 
 针对文本领域的对抗样本综述文章。主要内容为：第三章，介绍了攻击图像数据与攻击文本数据的区别，简要说明攻击图像相关的神经网络的历程，为NLP领域提供参考。第四章，介绍目前主流的攻击文本深度神经网络的方法。第五章，探讨了防御的方法（这里在没有接触这个领域的时候，有疑惑，并不知道对抗样本实际的应用场景）。第六章，提出目前领域内还未解决的问题。
 
-### <span id="[J]TACL(Transactions of the Association for Computational Linguistics)">[J]TACL(Transactions of the Association for Computational Linguistics)</span>
+### [J]TACL
 
 期刊概述：ACL旗下的期刊，NLP领域内的顶刊了，但是不知道CCF和中科院查不到。
 
@@ -135,7 +135,7 @@ SCI工程技术2区，三年平均IF：3.010
 
 生成对抗样本的交互界面和数据展示。人类作者首先在右上写下一个问题。而模型则会在左侧提供预测结果，并解释这样推断的原因（会高亮得出判断是因为哪些词）。而人类作者可以选择接受这个问题，用于迷惑模型。
 
-### <span id="[J]JMLR(Journal of Machine Learning Research)">[J]JMLR(Journal of Machine Learning Research)</span>
+### [J]JMLR
 
 期刊概述：ISSN：1532-4435
 
@@ -167,7 +167,7 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 ## <span id="2019">2019</span>
 
-### <span id="[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing))">[C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)</span>
+### [C]ICASSP
 
 会议概述：语音识别顶会
 
@@ -177,7 +177,7 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
 
-### <span id="[C]EMNLP(Empirical Methods in Natural Language Processing)">[C]EMNLP(Empirical Methods in Natural Language Processing)</span>
+### [C]EMNLP
 
 #### Universal Adversarial Triggers for Attacking and Analyzing NLP
 
@@ -195,7 +195,7 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 3.条件文本生成，主要攻击模型GPT-2
 
-### <span id="[C]NDSS(Network and Distributed System Security Symposium)">[C]NDSS(Network and Distributed System Security Symposium)</span>
+### [C]NDSS
 
 会议概述：计算机系统安全领域四大顶会之一（NDSS、CSS、USENIX SECURITY、IEEE S&P），CCFB
 
