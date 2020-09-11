@@ -5,17 +5,17 @@
 [1.2020](#2020)
 
 - [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#CAAAI)
-- [1.2 [C]ACL(Association for Computational Linguistics)](#[C]ACL)
-- [1.3 [J]TITS(ACM Transactions on Intelligent Systems and Technology)](#[J]TITS)
-- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#[J]TACL)
-- [1.5 [J]JMLR(Journal of Machine Learning Research)](#[J]JMLR)
+- [1.2 [C]ACL(Association for Computational Linguistics)](#CACL)
+- [1.3 [J]TITS(ACM Transactions on Intelligent Systems and Technology)](#JTITS)
+- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#JTACL)
+- [1.5 [J]JMLR(Journal of Machine Learning Research)](#JJMLR)
 - [1.6 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
-- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#[C]ICASSP)
-- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP)
-- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#[C]NDSS)
+- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#CICASSP)
+- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
+- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
 
 ## 数据集
 
