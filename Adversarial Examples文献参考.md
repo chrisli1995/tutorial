@@ -17,6 +17,12 @@
 - [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
 - [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
 
+[3.2018](#2018)
+
+- [[C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP)
+
+
+
 ## 数据集
 
 ![image.png](https://upload-images.jianshu.io/upload_images/7810235-5d28cd4dbd9daf56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -228,6 +234,18 @@ Baseline：(1) 随机算法：每个句子，随机选择10%的单词来修改�
 (3) DeepFool+NNS：使用DeepFool方法寻找穿越多分类问题决策边界的方向，进而找到最佳扰动，再在词典中通过最近邻搜索的方法寻找最接近的单词。
 
 攻击评估方式2为有害内容检测（有害内容检测是NLP应用的重要组成部分，可以净化网络环境）。数据集为kaggle 有害内容检测竞赛数据集。
+
+-------------------------------------
+
+
+
+## 2018
+
+## [C]EMNLP
+
+### Generating Natural Language Adversarial Examples
+
+2018的文章比较老，但在效果在文本分类的两个任务上结果非常好（情感分析+文本蕴含），并且是定向攻击。在看的文章中为数不多的采用老牌启发式算法寻找最佳对抗样本的方法。基本思路是通过遗传算法迭代产生对抗样本，每生成一代样本通过函数筛选出质量高的数据，高质量数据更有可能“培育”出下一代，直至产生能够扰动到目标标签的样本。
 
 
 
