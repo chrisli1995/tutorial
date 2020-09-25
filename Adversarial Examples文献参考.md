@@ -13,9 +13,10 @@
 
 [2.2019](#2019)
 
-- [2.1 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#CICASSP)
-- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
-- [2.3 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
+- [2.1 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
+- [2.2 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#CICASSP)
+- [2.3 [C]NAACL(North American Chapter of the Association for Computational Linguistics)](#CNAACL)
+- [2.4 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
 
 [3.2018](#2018)
 
@@ -169,19 +170,7 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 ------------------------------------------------------------------------------------------
 
-
-
 ## <span id="2019">2019</span>
-
-### [C]ICASSP
-
-会议概述：语音识别顶会
-
-### Universal Adversarial Attacks on Text Classifiers
-
-机构：伊朗沙力夫理工大学，伊朗清华
-
-文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
 
 ### [C]EMNLP
 
@@ -200,6 +189,26 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 2.阅读理解任务，主要攻击模型BiDAF（baseline）
 
 3.条件文本生成，主要攻击模型GPT-2
+
+### [C]ICASSP
+
+会议概述：语音识别顶会
+
+#### Universal Adversarial Attacks on Text Classifiers
+
+机构：伊朗沙力夫理工大学，伊朗清华
+
+文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
+
+### [C]NAACL
+
+会议概述：自然语言处理领域四大顶会之一（ACL、HAACL、EMNLP、COLING），CCFC会议
+
+#### Text Processing Like Humans Do Visually Attacking and Shielding NLP Systems
+
+机构：达姆施塔特工业大学（德国）
+
+​     2019年的文章，字符级的攻击，思想不同于其他文章的地方在于，在文本中添加视觉扰动，具体方案为规定概率的情况的下，每个字符都基于这个概率在字符空间中寻找与其相近的字符。字符空间除了使用常用的向量空间以外（用于词嵌入），还有基于描述的字符空间和简单字符空间，前者是通过在Unicode编码的基础上找到相邻的字符，后者单纯的在每个字符上下两个部分加入标记来完成。
 
 ### [C]NDSS
 
@@ -237,13 +246,11 @@ Baseline：(1) 随机算法：每个句子，随机选择10%的单词来修改�
 
 -------------------------------------
 
-
-
 ## 2018
 
-## [C]EMNLP
+### [C]EMNLP
 
-### Generating Natural Language Adversarial Examples
+#### Generating Natural Language Adversarial Examples
 
 2018的文章比较老，但在效果在文本分类的两个任务上结果非常好（情感分析+文本蕴含），并且是定向攻击。在看的文章中为数不多的采用老牌启发式算法寻找最佳对抗样本的方法。基本思路是通过遗传算法迭代产生对抗样本，每生成一代样本通过函数筛选出质量高的数据，高质量数据更有可能“培育”出下一代，直至产生能够扰动到目标标签的样本。
 
