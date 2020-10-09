@@ -6,6 +6,7 @@
 
 - [[C]ICBC(IEEE International Conference on Blockchain and Cryptocurrency)](#[C]ICBC)
 - [[C]COMPSAC(International Computer Software and Applications Conference)](#[C]COMPSAC)
+- [[J]IEEE Netw(IEEE Network)](#[J]IEEE Netw(IEEE Network))
 
 [2.2019](#2019)
 
@@ -28,7 +29,7 @@
 
 方法本身比较简单，但提供了一个区块链与自然语言结合的思路，可以依靠机器学习或者人工智能技术完成更智能的意图分析。
 
-### [C]COMPSAC
+### [J]IEEE Netw(IEEE Network)[C]COMPSAC
 
 #### Smart Contracts Vulnerability Auditing with Multi-semantics
 
@@ -38,7 +39,13 @@
 
 该工作应用于以太坊超过7200个智能合约样品上，达到了超过50%的检测效率。
 
+### [J]IEEE Netw(IEEE Network)
 
+期刊概述：顶刊，中科院分区1区
+
+#### Smart Contract Vulnerability Analysis and Security Audit
+
+类似综述论文，以太坊上智能合约的漏洞研究引起了广泛关注，论文对未检查发送漏洞（unchecked send/other functIon call）、重入攻击（reentrancy vulnerabilities）、权限控制漏洞（permission control vulnerabilites）、函数可见性漏洞（function visibility vulnerabilites）、时间戳依赖关系（timestamp dependency）、随机数漏洞（random number vulnerabilites）进行描述，并对现有的智能合约审计方法进行了总结，从不同角度对几种主流的审计工具进行了比较。
 
 ------------------------------------------------------------------------------------------
 

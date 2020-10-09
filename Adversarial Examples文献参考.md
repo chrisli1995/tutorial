@@ -13,14 +13,16 @@
 
 [2.2019](#2019)
 
-- [2.1 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
-- [2.2 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#CICASSP)
-- [2.3 [C]NAACL(North American Chapter of the Association for Computational Linguistics)](#CNAACL)
-- [2.4 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
+- [2.1 [C]ACL(Association for Computational Linguistics)](#CACL-2019)
+
+- [2.2 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
+- [2.3 [C]ICASSP(International Conference on Acoustics, Speech and Signal Processing)](#CICASSP)
+- [2.4 [C]NAACL(North American Chapter of the Association for Computational Linguistics)](#CNAACL)
+- [2.5 [C]NDSS(Network and Distributed System Security Symposium)](#CNDSS)
 
 [3.2018](#2018)
 
-- [[C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP)
+- [3.1 [C]EMNLP(Empirical Methods in Natural Language Processing)](#[C]EMNLP-2018)
 
 
 
@@ -172,23 +174,37 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 ## <span id="2019">2019</span>
 
+### [C]ACL-2019
+
+会议概述：NLP领域四大顶会之一（ACL、HAACL、EMNLP、COLING）
+
+#### Generating Natural Language Adversarial Examples through Probability Weighted Word Saliency
+
+机构：华中科技大学，加州大学洛杉矶分校，哈尔滨工业大学
+
+导师：何琨，华中科技大学计算机学院教授
+
+​     2019年的文章，比较老了，采用了词级的对抗样本生成方式，传统的找同义词替换原文中高影响力的词，采用贪心的策略直至成功修改预测结果。
+
+​     与自己的思路比较相符，字符级的攻击，通过简单的单词检测就能破解，句子级的攻击容易受到语法检测的破解。
+
 ### [C]EMNLP
 
 #### Universal Adversarial Triggers for Attacking and Analyzing NLP
 
 机构：马里兰大学，加里福利亚大学
 
-以前，NLP中的对抗攻击一般都是针对特定输入的，那么他们对任意的输入是否有效呢？
+​	以前，NLP中的对抗攻击一般都是针对特定输入的，那么他们对任意的输入是否有效呢？
 
 本文针对这个问题，搜索通用的对抗性触发器：与输入无关的token序列，当连接到来自数据集的任何输入时，这些token序列触发模型生成特定的预测。例如，触发器导致SNLI隐含精度从89.94%下降到 0.55%，72%的“为什么”问题在SQuAD中回答“杀死美国人”，而gps -2语言模型即使在非种族背景下也会输出种族主义。（这就很厉害了。）
 
-主要攻击了三个任务：
+​	主要攻击了三个任务：
 
-1.文本分类任务，主要对三个模型进行了攻击：BI-LSTM、Word2Vec、ELMO
+​	1.文本分类任务，主要对三个模型进行了攻击：BI-LSTM、Word2Vec、ELMO
 
-2.阅读理解任务，主要攻击模型BiDAF（baseline）
+​	2.阅读理解任务，主要攻击模型BiDAF（baseline）
 
-3.条件文本生成，主要攻击模型GPT-2
+​	3.条件文本生成，主要攻击模型GPT-2
 
 ### [C]ICASSP
 
@@ -196,9 +212,9 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 #### Universal Adversarial Attacks on Text Classifiers
 
-机构：伊朗沙力夫理工大学，伊朗清华
+​	机构：伊朗沙力夫理工大学，伊朗清华
 
-文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
+​	文章说的比较清楚，目的是在构造一个通用的模型生成对抗样本，只要攻击的是文本分类模型。与以往的研究有一点不一样的是，它是通过梯度方式找到合适的替换词。其他的没有什么特别的地方。
 
 ### [C]NAACL
 
@@ -220,39 +236,39 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 导师：纪守领，浙江大学教授
 
-经典文章，提出了textbugger这个框架，可以在白盒与黑盒两个场景下生成保留样本意愿的对抗样本。在白盒场景下计算雅各比矩阵来找到句子中的关键词，主要方法为五种策略对关键词进行修改，通过置信度的变化找到最佳的修改方案；在黑盒场景下，先找到对结构最影响力的句子，再通过评分函数寻找句子中的关键词，关键词的修改方案与白盒的相同（也是textbugger的本质）。
+​	经典文章，提出了textbugger这个框架，可以在白盒与黑盒两个场景下生成保留样本意愿的对抗样本。在白盒场景下计算雅各比矩阵来找到句子中的关键词，主要方法为五种策略对关键词进行修改，通过置信度的变化找到最佳的修改方案；在黑盒场景下，先找到对结构最影响力的句子，再通过评分函数寻找句子中的关键词，关键词的修改方案与白盒的相同（也是textbugger的本质）。
 
-主要贡献可以分为以下三点：
+​	主要贡献可以分为以下三点：
 
-1.提出textbugger框架，在白盒和黑盒两个场景下生成高效的对抗样本。
+​	1.提出textbugger框架，在白盒和黑盒两个场景下生成高效的对抗样本。
 
-2给出了四种对抗样本和原样本的相似度评估方式。（看论文比较少，应该不是自己提出）
+​	2给出了四种对抗样本和原样本的相似度评估方式。（看论文比较少，应该不是自己提出）
 
-3.讨论了两种防御策略，拼写检测与对抗训练。
+​	3.讨论了两种防御策略，拼写检测与对抗训练。
 
-攻击评估方式1采用了情感分析，数据集为IMDB数据集和Rotten Tomatoes Movie Reviews数据。
+​	攻击评估方式1采用了情感分析，数据集为IMDB数据集和Rotten Tomatoes Movie Reviews数据。
 
-白盒攻击：针对LR、CNN 和 LSTM 模型。
+​	白盒攻击：针对LR、CNN 和 LSTM 模型。
 
-黑盒攻击：Google Cloud NLP、IBM Waston Natural Language Understanding (IBM Watson)、Microsoft Azure Text Analytics (Microsoft Azure)、Amazon AWS Comprehend (Amazon AWS)、Facebook fast-Text (fastText)、ParallelDots、TheySay Sentiment、Aylien Sentiment、TextProcessing、Mashape Sentiment 等参数未知的模型。
+​	黑盒攻击：Google Cloud NLP、IBM Waston Natural Language Understanding (IBM Watson)、Microsoft Azure Text Analytics (Microsoft Azure)、Amazon AWS Comprehend (Amazon AWS)、Facebook、fast-Text (fastText)、ParallelDots、TheySay Sentiment、Aylien Sentiment、TextProcessing、Mashape Sentiment 等参数未知的模型。
 
-Baseline：(1) 随机算法：每个句子，随机选择10%的单词来修改。
+​	Baseline：(1) 随机算法：每个句子，随机选择10%的单词来修改。
 
-(2) FGSM+NNS：使用快速梯度符号法寻找单词嵌入层的最佳扰动，再在词典中通过最近邻搜索的方式寻找到最接近的单词。
+​					(2) FGSM+NNS：使用快速梯度符号法寻找单词嵌入层的最佳扰动，再在词典中通过最近邻搜索的方式寻找到最接近的单词。
 
-(3) DeepFool+NNS：使用DeepFool方法寻找穿越多分类问题决策边界的方向，进而找到最佳扰动，再在词典中通过最近邻搜索的方法寻找最接近的单词。
+​					(3) DeepFool+NNS：使用DeepFool方法寻找穿越多分类问题决策边界的方向，进而找到最佳扰动，再在词典中通过最近邻搜索的方法寻找最接近的单词。
 
-攻击评估方式2为有害内容检测（有害内容检测是NLP应用的重要组成部分，可以净化网络环境）。数据集为kaggle 有害内容检测竞赛数据集。
+​	攻击评估方式2为有害内容检测（有害内容检测是NLP应用的重要组成部分，可以净化网络环境）。数据集为kaggle 有害内容检测竞赛数据集。
 
 -------------------------------------
 
 ## 2018
 
-### [C]EMNLP
+### [C]EMNLP-2018
 
 #### Generating Natural Language Adversarial Examples
 
-2018的文章比较老，但在效果在文本分类的两个任务上结果非常好（情感分析+文本蕴含），并且是定向攻击。在看的文章中为数不多的采用老牌启发式算法寻找最佳对抗样本的方法。基本思路是通过遗传算法迭代产生对抗样本，每生成一代样本通过函数筛选出质量高的数据，高质量数据更有可能“培育”出下一代，直至产生能够扰动到目标标签的样本。
+​	2018的文章比较老，但在效果在文本分类的两个任务上结果非常好（情感分析+文本蕴含），并且是定向攻击。在看的文章中为数不多的采用老牌启发式算法寻找最佳对抗样本的方法。基本思路是通过遗传算法迭代产生对抗样本，每生成一代样本通过函数筛选出质量高的数据，高质量数据更有可能“培育”出下一代，直至产生能够扰动到目标标签的样本。
 
 
 
