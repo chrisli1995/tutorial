@@ -6,7 +6,7 @@
 
 - [[C]ICBC(IEEE International Conference on Blockchain and Cryptocurrency)](#[C]ICBC)
 - [[C]COMPSAC(International Computer Software and Applications Conference)](#[C]COMPSAC)
-- [[C]IJCAI(International Joint Conference on Artificial Intelligence)](#[J]IEEE Netw)
+- [[C]IJCAI(International Joint Conference on Artificial Intelligence)](#[C]IJCAI)
 - [[J]IEEE Netw(IEEE Network)](#[J]IEEE Netw)
 
 [2.2019](#2019)
