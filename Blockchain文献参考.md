@@ -6,7 +6,8 @@
 
 - [[C]ICBC(IEEE International Conference on Blockchain and Cryptocurrency)](#[C]ICBC)
 - [[C]COMPSAC(International Computer Software and Applications Conference)](#[C]COMPSAC)
-- [[J]IEEE Netw(IEEE Network)](#[J]IEEE Netw(IEEE Network))
+- [[C]IJCAI(International Joint Conference on Artificial Intelligence)](#[J]IEEE Netw)
+- [[J]IEEE Netw(IEEE Network)](#[J]IEEE Netw)
 
 [2.2019](#2019)
 
@@ -29,7 +30,9 @@
 
 方法本身比较简单，但提供了一个区块链与自然语言结合的思路，可以依靠机器学习或者人工智能技术完成更智能的意图分析。
 
-### [J]IEEE Netw(IEEE Network)[C]COMPSAC
+### [C]COMPSAC
+
+会议概述：软件工程CCFC类的会议，虽然等级不高，但对论文的完整性要求还是很高的
 
 #### Smart Contracts Vulnerability Auditing with Multi-semantics
 
@@ -39,7 +42,17 @@
 
 该工作应用于以太坊超过7200个智能合约样品上，达到了超过50%的检测效率。
 
-### [J]IEEE Netw(IEEE Network)
+### [C]IJCAI
+
+#### Smart Contract Vulnerability Detection Using Graph Neural Networks
+
+机构：浙江工商大学
+
+导师：刘振广
+
+现有的智能合约漏洞检测方法严重依赖专家规则，导致检测率较低。本文采用了利用图神经网络进行漏洞检测的方法。主要的贡献点为  设计了一个基于合约代码的构造图过程，使用DG-GCN（他人提出）和TMP（时态消息传播网络，本文提出）来对合约进行漏洞检测。
+
+### [J]IEEE Netw
 
 期刊概述：顶刊，中科院分区1区
 
