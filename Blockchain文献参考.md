@@ -12,6 +12,7 @@
 [2.2019](#2019)
 
 - [ArXiv](#ArXiv)
+- [[C]IoTSMS(International Conference on Internet of Things: Systems, Management and Security)](#[C]IoTSMS)
 - [[C]NDSS(Network and Distributed System Security Symposium)](#[C]NDSS)
 
 ## 数据集
@@ -80,6 +81,18 @@
 
 - 设计具有学习能力的"智能代理"来规范区块链。
 - 通过大量的数据来评估分散结构的性能，并构造学习模型进行预测。
+
+### [C]IoTSMS
+
+#### SoliAudit: Smart Contract Vulnerability Assessment Based on Machine Learning and Fuzz Testing
+
+机构：Institute for Information Industry Taiwan
+
+本文提出了框架SoliAudit(Solity Audit)，使用机器学习和模糊测试来评估智能合约的脆弱性，验证13种漏洞，还创建了灰盒测试机制，模拟智能合约和区块链环境，用于在线交易验证。
+
+机器学习方法：特征抽取采用了n-gram和word2vec两种常用的序列到向量的方法，使用逻辑回归、支持向量机、决策树、随机森林、K临近算法学习来自n-gram模型的结果；使用CNN学习来自word2vec模型的结果。并且尝试在源代码中映射出受攻击的位置。 
+
+模糊测试：没有看太多，比较有意思的是模拟了在合约调用时候gas的影响。
 
 ### [C]NDSS
 
