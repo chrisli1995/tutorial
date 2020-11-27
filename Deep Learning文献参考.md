@@ -7,7 +7,7 @@
 - [1.1 [C]CVPR(Computer Vision and Pattern Recognition)](#[C]CVPR)
 - [1.2 [C]NeurIPS(Neural Information Processing Systems)](#[C]NeurIPS)
 
-[2.2019](#2019)
+[2.2018](#2018)
 
 - [2.1 [C]ACL(Association for Computational Linguistics)](#CACL-2019)
 
@@ -48,9 +48,19 @@
 2. Adversarial-to-Standard：对比学习的样本为一个对抗样本一个普通样本，减轻了编码器需要抵抗两个对抗样本的工作量。需要注意的是归一化层不能共享参数；
 3. Dual Stream：前两种的结合，加权（1:1）计算损失。
 
+## 2018
 
+### [C]ACL(Association for Computational Linguistics)
 
+会议概述：自然语言处理四大顶会，CCFA
 
+#### Adversarial Contrastive Estimation
+
+机构：多伦多大学
+
+对比学习的主旨让模型学习正负样本之间的差距，噪声对比估计（Noise Contrastive Estimation，NCE）就是采用这个方法的NLP领域例子，传统的例如在Word2Vec中的NCE通常只通过人的先验知识进行编码，以确定负样本的构成，但往往只生成简单负样本，简单负样本往往不会强迫模型去观察正样本的关键特征，即使出现难负样本，由于样本量小，也仅仅意味着缓慢的收敛。
+
+论文提出对抗样本作为改进对比学习的一种手段，采用GAN的生成器生成难负样本，验证了难负例对模型的学习至关重要。
 
 
 
