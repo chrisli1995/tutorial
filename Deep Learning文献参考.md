@@ -45,6 +45,22 @@
 
 会议概述：人工智能顶会，CCFA
 
+#### Contrastive Learning with Adversarial Examples
+
+传统的基于对比学习的自监督方法中，往往忽视了难负例，本文通过对抗样本生成更具挑战的正负样本。
+
+#### Adversarial Self-Supervised Contrastive Learning
+
+机构：韩国科学技术院
+
+​     2020年的NeurIPS连续接受了三篇关于基于对抗样本的自监督对比学习文章。
+
+​     相关工作主要总结为：
+
+​     **1.提出了一种不需要任何标签信息的攻击手段。**
+
+​     2.提出了一种对抗性自监督学习方法，这一点和其他文章差不多。
+
 #### Robust Pre-Training by Adversarial Contrastive Learning
 
 在前人证明对抗样本对自监督学习的模型鲁棒性上的优势以后，论文结合了自监督学习中热门的对比学习作为预训练的框架，提出对抗性对比学习（Adversarial Contrastive Learning, ACL）。
@@ -54,10 +70,6 @@
 1. Adversarial-to-Adversarial：对比学习的样本全是对抗样本；
 2. Adversarial-to-Standard：对比学习的样本为一个对抗样本一个普通样本，减轻了编码器需要抵抗两个对抗样本的工作量。需要注意的是归一化层不能共享参数；
 3. Dual Stream：前两种的结合，加权（1:1）计算损失。
-
-#### Contrastive Learning with Adversarial Examples
-
-传统的基于对比学习的自监督方法中，往往忽视了难负例，本文通过对抗样本生成更具挑战的正负样本。
 
 ## 2018
 
