@@ -23,6 +23,14 @@
 
 ## <span id="2020">2020</span>
 
+### ArXiv
+
+#### Supervised Contrastive Learning For Pre-Trained Language Model Fine-tuning
+
+自监督对比学习的目的是在未知标签的情况下拉进同样本之间的距离，退远不同样本的距离，达到抽取共性特征的目的。然而其做法会导致同类的样本之间的距离也变远。论文基于此提出了有监督对比学习。
+
+在自监督对比学习流行的基础下提出一个新的损失函数SCL（监督对比学习），将同一类样本互相作为正例，不同样本作为负例，以此达到拉进类内样本、拉开类间距离的目的。
+
 ### [C]CVPR
 
 会议概述：人工智能（计算机视觉领域）顶会，CCFA
@@ -44,9 +52,12 @@
 在对比学习框架SimCLR的基础上提出了三种训练模式：
 
 1. Adversarial-to-Adversarial：对比学习的样本全是对抗样本；
-
 2. Adversarial-to-Standard：对比学习的样本为一个对抗样本一个普通样本，减轻了编码器需要抵抗两个对抗样本的工作量。需要注意的是归一化层不能共享参数；
 3. Dual Stream：前两种的结合，加权（1:1）计算损失。
+
+#### Contrastive Learning with Adversarial Examples
+
+传统的基于对比学习的自监督方法中，往往忽视了难负例，本文通过对抗样本生成更具挑战的正负样本。
 
 ## 2018
 
