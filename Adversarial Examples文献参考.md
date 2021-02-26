@@ -6,10 +6,11 @@
 
 - [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#CAAAI)
 - [1.2 [C]ACL(Association for Computational Linguistics)](#CACL)
-- [1.3 [J]TITS(ACM Transactions on Intelligent Systems and Technology)](#JTITS)
-- [1.4 [J]TACL(Transactions of the Association for Computational Linguistics)](#JTACL)
-- [1.5 [J]JMLR(Journal of Machine Learning Research)](#JJMLR)
-- [1.6 [J]软件学报](#[J]软件学报)
+- [1.3 [C]EMNLP(Empirical Methods in Natural Language Processing)](#CEMNLP)
+- [1.4 [J]TITS(ACM Transactions on Intelligent Systems and Technology)](#JTITS)
+- [1.5 [J]TACL(Transactions of the Association for Computational Linguistics)](#JTACL)
+- [1.6 [J]JMLR(Journal of Machine Learning Research)](#JJMLR)
+- [1.7 [J]软件学报](#[J]软件学报)
 
 [2.2019](#2019)
 
@@ -131,6 +132,18 @@ SCI工程技术2区，三年平均IF：3.010
 导师：盛权政（Michael Sheng）
 
 针对文本领域的对抗样本综述文章。主要内容为：第三章，介绍了攻击图像数据与攻击文本数据的区别，简要说明攻击图像相关的神经网络的历程，为NLP领域提供参考。第四章，介绍目前主流的攻击文本深度神经网络的方法。第五章，探讨了防御的方法（这里在没有接触这个领域的时候，有疑惑，并不知道对抗样本实际的应用场景）。第六章，提出目前领域内还未解决的问题。
+
+### [C]EMNLP
+
+会议概述：NLP领域四大顶会之一（ACL、HAACL、EMNLP、COLING）
+
+#### Mind Y our Inflections! Improving NLP for Non-Standard Englishes with Base-Inflection Encoding
+
+机构：Salesforce AI Research，新加坡国立大学
+
+对抗攻击的防御文章，词形变化（Inflectional variation）是英语的一个重要特征，虽然人类对于在理解上不会受到词形变化的影响，但NLP系统往往不足以过滤到这些信息，这就导致了对抗攻击的产生。
+
+论文提出了一个BITE（Base-Inflection Encoding）框架，在将语法信息输入到NLP系统之前，通过减少词形变化来对句子进行token操作。以上的操作存在于对预训练模型进行下游任务Fine-tuning时，所以可以使得该方案更好的推广到英语方言。主要还是针对效率在做事，并给出了自己对于词汇效率的评估方案。
 
 ### [J]TACL
 
