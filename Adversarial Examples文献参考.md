@@ -2,6 +2,10 @@
 
 ## 内容
 
+[0.2021](#2021)
+
+- [0.1 [J]IEEE Transactions on Image Processing](#[J]IEEE Transactions on Image Processing)
+
 [1.2020](#2020)
 
 - [1.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#CAAAI)
@@ -33,7 +37,21 @@
 
 ------------------------------------------------------------------------------------------
 
+## <span id="2021">2021</span>
 
+### [J]IEEE Transactions on Image Processing
+
+期刊概述：ISSN:1057-7149，计算机科学1区期刊
+
+#### Interpreting and Improving Adversarial Robustness of Deep Neural Networks With Neuron Sensitivity
+
+机构：北航大学
+
+导师：刘祥龙
+
+​	论文基于CNN（VGG-16、Inception-V3）的神经元在数据集（CIFAR-10、ImageNet）上运算的结果来探讨神经网络在对抗样本下的理论基础，提出使用神经元敏感度的方式来解释模型受到对抗攻击的原因。
+
+​	基于模型的鲁棒性和神经元的敏感性有密切联系这一个观点，通过在损失函数中加入敏感度正则项来提高模型的鲁棒性。同时也证实了最新的对抗训练策略，其实都是在降低神经元的敏感度。
 
 ## <span id="2020">2020</span>
 
