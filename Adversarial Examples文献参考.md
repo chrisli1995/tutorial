@@ -39,6 +39,14 @@
 
 ## <span id="2021">2021</span>
 
+### [C] AAAI(National Conference of the American Association for Artificial Intelligence)
+
+会议概述：AI领域顶会
+
+#### Generating Natural Language Attacks in a Hard Label Black Box Setting
+
+​	论文在原本使用模型预测置信度的黑盒攻击的基础下更进一步，只通过模型最后预测的标签（硬标签）就生成对抗样本。策略上采用种群优化算法，通过对单词进行同义词替换找到与源样本语义最相近的对抗样本。（在决策边界附近）
+
 ### [J]IEEE Transactions on Image Processing
 
 期刊概述：ISSN:1057-7149，计算机科学1区期刊
