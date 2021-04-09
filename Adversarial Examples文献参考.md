@@ -47,6 +47,18 @@
 
 ​	论文在原本使用模型预测置信度的黑盒攻击的基础下更进一步，只通过模型最后预测的标签（硬标签）就生成对抗样本。策略上采用种群优化算法，通过对单词进行同义词替换找到与源样本语义最相近的对抗样本。（在决策边界附近）
 
+### [C] ICLR(International Conference on Learning Representations)
+
+会议概述：国际学习表征会议，2013 年才刚刚成立了第一届。已经被学术研究者们广泛认可，被认为「深度学习的顶级会议」。
+
+#### Detecting and Diagnosing Adversarial Images with Class-Conditional Capsule Reconstructions
+
+机构：谷歌大脑
+
+教授：Geoffrey Hinton
+
+​	论文展示了一种简单技术：用 capsule 模型检测对抗图像。capsule 模型不仅能够对图像进行分类，还可以利用姿态参数（pose parameters）和正确的顶层 capsule 特征来重建图像。对抗图像与典型的类别预测并不相同，当模型根据对应类别的顶层 capsule 特征重建图像时，它们的重建误差较大。在输入图像及其根据顶层 capsule 得到的重建图像间设置 L2 距离的阈值，高于阈值则代表为对抗样本，该方法可以在三种不同数据集上高效检测对抗图像。
+
 ### [J]IEEE Transactions on Image Processing
 
 期刊概述：ISSN:1057-7149，计算机科学1区期刊
