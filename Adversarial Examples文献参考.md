@@ -281,6 +281,12 @@ SCI工程技术2区，3年平均IF：3.791，CCFA类期刊（人工智能）
 
 会议概述：计算机系统安全领域四大顶会之一（NDSS、CSS、USENIX SECURITY、IEEE S&P），CCFB
 
+#### NIC Detecting adversarial samaples with neural network invariant checking
+
+机构：普渡大学
+
+​     论文提出了一种针对CNN的对抗样本检测器，主要通过两种两类通道（起源通道和激活值分布通道）完成对抗样本的检测。具体来说，通过对输入样本每一层的结果进行整合，然后采用OSVM（One-class Support Vector Machine）作为检测器学习，由于只采用了正常样本，该方法的泛用性比较强。实验结果在多个数据集和多个常见的对抗攻击算法上实现了接近100%的准确率。
+
 #### TextBugger: Generating Adversarial Text Against Real-world Applications
 
 机构：浙江大学，University of Illinois at Urbana-Champaign（伊利诺伊大学厄巴纳-香槟分校，UIUC，美国）
