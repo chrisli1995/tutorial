@@ -4,7 +4,10 @@
 
 [0.2021](#2021)
 
-- [0.1 [J]IEEE Transactions on Image Processing](#[J]IEEE Transactions on Image Processing)
+- [0.1 [C]AAAI(National Conference of the American Association for Artificial Intelligence)](#CAAAI)
+- [0.2 [C]EACL(The European Chapter of the Association for Computational Linguistics)](#EACL)
+- [0.3 [C]ICLR(International Conference on Learning Representations)](#CICLR)
+- [0.4 [J]IEEE Transactions on Image Processing](#[J]IEEE Transactions on Image Processing )
 
 [1.2020](#2020)
 
@@ -39,7 +42,7 @@
 
 ## <span id="2021">2021</span>
 
-### [C] AAAI(National Conference of the American Association for Artificial Intelligence)
+### [C] AAAI
 
 会议概述：AI领域顶会
 
@@ -47,7 +50,17 @@
 
 ​	论文在原本使用模型预测置信度的黑盒攻击的基础下更进一步，只通过模型最后预测的标签（硬标签）就生成对抗样本。策略上采用种群优化算法，通过对单词进行同义词替换找到与源样本语义最相近的对抗样本。（在决策边界附近）
 
-### [C] ICLR(International Conference on Learning Representations)
+### [C]EACL
+
+ACL欧洲分会，2021年以后会一年一届，值得期待。
+
+#### Frequency-Guided Word Substitutions for Detecting Textual Adversarial Examples
+
+机构：伦敦大学
+
+​     论文针对文本对抗样本的检测展开工作，证明了替换词的词级对抗攻击，可以通过比较替换词与源词之间的词频的差异来完成来识别对抗样本。主要针对CNN、LSTM、Transformer（RoBERTa）三类模型研究，检测的均是词级的对抗攻击。
+
+### [C] ICLR
 
 会议概述：国际学习表征会议，2013 年才刚刚成立了第一届。已经被学术研究者们广泛认可，被认为「深度学习的顶级会议」。
 
